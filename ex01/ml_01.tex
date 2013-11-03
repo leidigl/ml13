@@ -1,0 +1,534 @@
+\documentclass{article}
+\usepackage{ml1_homework_template}
+
+\usepackage{amssymb}
+
+\usepackage{fancyvrb}
+\usepackage{color}
+
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+% please submit the corresponding pdf by email to
+% homework@class,brml.org, and write "homework sheet xx" in the 
+% title.  No more, no less!  (Instead of xx, however,
+% put the decimal number of the homework sheet.)
+
+% Please update the following line, only change XX to the homework
+% sheet number
+\title{homework sheet 01}
+
+
+\author{
+\name{Andre Seitz}\\
+\imat{3622870}\\
+\email{andre.seitz@mytum.de}
+\And
+\name{Linda Leidig} \\
+\imat{3608416}\\
+\email{linda.leidig@tum.de}
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+
+
+\begin{document}
+\maketitle
+
+\section{Assignment}		%1
+For the calculation of eigenvalues and eigenvectors of the given matrix A
+\begin{eqnarray}
+A x &=& \lambda x \label{definition}
+\\
+(A-\lambda I)x &=& 0\\
+det(A-\lambda I) &=& 0
+\end{eqnarray}
+%\begin{equation}
+%det(A-\lambda I) = 0
+%\end{equation}
+
+was used with $x$ and $\lambda$ being the eigenvectors and the eigenvalues of A, respectively. First the eigenvalues $\lambda$ were calculated.
+
+\begin{eqnarray}
+det ( A - \lambda I ) = 0 \\
+det ( \left(
+\begin{array}{ccc}
+2 & -1 & 0 \\
+-1 & 2 & -1 \\
+0 & -1 & 2
+\end{array}
+\right) - \lambda I ) = 0 \\
+\left|
+\begin{array}{ccc}
+2-\lambda & -1 & 0 \\
+-1 & 2-\lambda & -1 \\
+0 & -1 & 2-\lambda 
+\end{array}
+\right| = 0 \\
+(2-\lambda) \cdot \left|
+\begin{array}{cc}
+2-\lambda & -1 \\
+-1 & 2-\lambda 
+\end{array} \right|
+- (-1) \cdot \left|
+\begin{array}{cc}
+-1 & 0 \\
+-1 & 2-\lambda
+\end{array} \right| = 0 \\
+(2-\lambda)\cdot((2-\lambda)^2-1)+(-1)\cdot(2-\lambda)-0\cdot(-1) = 0\\
+(2-\lambda)\cdot((2-\lambda)^2-1)+(-1)\cdot(2-\lambda) = 0
+\end{eqnarray}
+
+By division through $(2- \lambda)$ the first $\lambda$ can be derived as $\lambda_1 = 2$.
+\begin{eqnarray}
+((2-\lambda)^2-1)+(-1) = 0 \\
+(2-\lambda)^2-2 = 0 \\
+\lambda^2-4\lambda+4-2 = 0 \\
+\lambda^2-4\lambda+2 = 0 \\
+\lambda_{2,3} = 2\pm \sqrt{2}
+\end{eqnarray}
+The eigenvectors of the corresponding eigenvalues can now be derived by using $(A - \lambda I)e = 0$.
+
+\
+For $\lambda_1 = 2$:
+\begin{eqnarray}
+\left(
+\begin{array}{ccc}
+0 & -1 & 0 \\
+-1 & 0 & -1 \\
+0 & -1 & 0
+\end{array} \right) \cdot x = 0
+\end{eqnarray}
+resolves to the following system of linear equations:
+\begin{eqnarray}
+-x_2 = 0 \\
+-x_1 -x_3 = 0 \\
+-x_2 = 0
+\end{eqnarray}
+This system can be solved to
+\begin{eqnarray}
+x_2 &=& 0 \\
+x_1 &=& -x_3
+\end{eqnarray}
+
+and leads to the eigenvectors
+\begin{equation}
+\left( \begin{array}{c}
+x_1 \\ 0 \\ -x_1
+\end{array} \right)
+\end{equation}
+
+Choosing $x_1 = 1$ results in
+\begin{equation}
+\left( \begin{array}{c}
+1 \\ 0 \\ -1
+\end{array} \right)
+\end{equation}
+as an eigenvector of $A$ to the eigenvalue $\lambda_1 = 2$.
+
+For $\lambda_2 = 2 - \sqrt{2}$:
+\begin{eqnarray}
+\left(
+\begin{array}{ccc}
+\sqrt{2} & -1 & 0 \\
+-1 & \sqrt{2} & -1 \\
+0 & -1 & \sqrt{2}
+\end{array} \right) \cdot x = 0
+\end{eqnarray}
+resolves to the following system of linear equations:
+\begin{eqnarray}
+\sqrt{2}x_1-x_2 = 0 \\
+-x_1 +\sqrt{2} x_2 -x_3 = 0 \\
+-x_2 + \sqrt{2} x_3 = 0
+\end{eqnarray}
+This results in 
+\begin{eqnarray}
+x_1 &=& x_3 \\
+x_2 &=& \frac{2x_1}{\sqrt{2}}
+\end{eqnarray}
+
+and leads to the eigenvectors
+\begin{equation}
+\left( \begin{array}{c}
+x_1 \\ \sqrt{2} x_1 \\ x_1
+\end{array} \right)
+\end{equation}
+
+Choosing $x_1 = 1$ results in
+\begin{equation}
+\left( \begin{array}{c}
+1 \\ \sqrt{2} \\ 1
+\end{array} \right)
+\end{equation}
+as an eigenvector of $A$ to the eigenvalue $\lambda_2 = 2- \sqrt{2}$.
+
+For $\lambda_3 = 2 + \sqrt{2}$:
+\begin{eqnarray}
+\left(
+\begin{array}{ccc}
+-\sqrt{2} & -1 & 0 \\
+-1 & -\sqrt{2} & -1 \\
+0 & -1 & -\sqrt{2}
+\end{array} \right) \cdot x = 0
+\end{eqnarray}
+resolves to the following system of linear equations:
+\begin{eqnarray}
+-\sqrt{2}x_1-x_2 = 0 \\
+-x_1 -\sqrt{2} x_2 -x_3 = 0 \\
+-x_2 - \sqrt{2} x_3 = 0
+\end{eqnarray}
+This results in 
+\begin{eqnarray}
+x_1 &=& x_3 \\
+x_2 &=& \frac{2x_1}{-\sqrt{2}}
+\end{eqnarray}
+
+and leads to the eigenvectors
+\begin{equation}
+\left( \begin{array}{c}
+x_1 \\ -\sqrt{2} x_1 \\ x_1
+\end{array} \right)
+\end{equation}
+
+Choosing $x_1 = 1$ results in
+\begin{equation}
+\left( \begin{array}{c}
+1 \\ -\sqrt{2} \\ 1
+\end{array} \right)
+\end{equation}
+as an eigenvector of $A$ to the eigenvalue $\lambda_3 = 2 + \sqrt{2}$.
+
+
+
+The python code, solving the same problem:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+\PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k+kn}{import} \PY{n}{linalg}
+
+\PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+
+\PY{n}{w}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{linalg}\PY{o}{.}\PY{n}{eig}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+
+\PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{The eigenvalues are:}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\PY{k}{print} \PY{n}{w}
+\PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{and the eigenvectors are:}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\PY{k}{print} \PY{n}{v}
+\end{Verbatim}
+
+
+
+\section{Assignment}			%2
+Let $B \in \mathbb{R}^{n \times n}$ be a matrix with $n$ linearly independent eigenvectors $x_1, x_2, ..., x_n$. $U$ is a matrix having these eigenvectors as columns and $D$ is a diagonal matrix with the corresponding eigenvalues $\lambda_i$ in the diagonal.
+
+To show:
+\begin{equation}
+B = UDU^{-1}
+\end{equation}
+
+Using the rules of matrix multiplication the following transformations can be performed:
+\begin{eqnarray}
+B &=& UDU^{-1}\\
+BU &=& UDU^{-1}U\\
+BU &=& UD
+\end{eqnarray}
+Let $j \in {1, 2, ..., n}$.
+
+The multiplication of $B$ with $U$ correlates with the multiplication of $B$ with each column of $U$. The $n$ resulting values written as matrix come up with the result of $BU$. In formulas:
+ \begin{eqnarray}
+ BU = (BU_{.j})_{j=1,...,n} = (B x_j)_{j=1,...,n}
+ \label{left}
+ \end{eqnarray}
+ 
+Multiplying $U$ and $D$ results in a matrix where column $j$ corresponds to the product of the eigenvector $e_j$ i.e. column $j$ of $U$ and the eigenvalue $\lambda _j$. In formulas:
+\begin{eqnarray}
+(UD_{.j})_{j = 1,...,n} = (U_{.j}\lambda_j)_{j = 1,...,n} = (x_j \lambda_j)_{j=1,...,n}
+\label{right}
+\end{eqnarray}
+
+With \ref{left} and \ref{right} we can say:
+\begin{eqnarray}
+BU &=& UD\\
+B x_j &=& \lambda_j x_j \;\;\; \forall j \in {1,2,...,n}
+\end{eqnarray}
+which comes up with the definition of eigenvalues and eigenvectors (see \ref{definition}).
+
+
+\section{Assignment}		%3
+(1):
+
+Let $A \in \mathbb{R}^n\times n$  
+be real and symmetric. Next assume 
+\begin{equation}
+\label{linc}
+\lambda \in \mathbb{C}
+\end{equation}
+ being an eigenvalue and x its corresponding eigenvector with
+ \begin{equation}
+ \label{xinc}
+ x \in \mathbb{C}
+ \end{equation}
+ The eigenvalue and eigenvector is defined as
+ \begin{equation}
+ \label{nonconj}
+ Ax=\lambda x
+ \end{equation}
+ and from \ref{linc} and \ref{xinc} follows, that also
+ \begin{eqnarray}
+ Ax \in \mathbb{C} \\
+ \lambda x \in \mathbb{C}
+ \end{eqnarray}
+ Let further $\bar{x}$ and $\bar{\lambda}$ be the complex conjugates of x and y respectively.
+ Because of
+ \begin{eqnarray}
+ (a-bi)(c-di) = \\
+ ac - adi - bci + bdi^2 = \\
+ ac - bd - (bc + ad)i = \\
+ \bar{ac - bd + (bc+ad)i} = \\
+ \bar{ac +bci + adi + bdi^2} = \\
+ \bar{(a+bi)(c+di)}
+ \end{eqnarray}
+ the following equation is alos true
+ \begin{equation}
+ \label{conj}
+ A\bar{x} = \bar{\lambda}\bar{x}
+ \end{equation}
+ A left-sided multiplication of \ref{conj} and \ref{nonconj} with the transposed vector x or its conjugate is valid. So the following can be written:
+ \begin{equation}
+ \label{one}
+ \bar{x^T}Ax = \bar{x^T} \lambda x
+ \end{equation}
+ \begin{equation}
+ \label{two}
+  x^TA\bar{x} = x^T \bar{\lambda} \bar{x}
+ \end{equation}
+ By subtracting \ref{two} from \ref{one}, the following equation can be stated:
+ \begin{equation}
+ \bar{x^T} A x - x^T A \bar{x} = \bar{x^T} \lambda x - x^T \bar{\lambda} \bar{x} = (\lambda - \bar{\lambda}\bar{x^T}x)
+ \end{equation}
+ As the left side of the equation equals zero, due to the symmetry property of A, also the right side has to equal zero.
+ As $\bar{x^T}x$ cannot be zero, due to x and $\bar{x^T}$ not being the nullvector, $\lambda-\bar{\lambda}$ has to be zero:
+ \begin{equation}
+ \lambda - \bar{\lambda} = 0 \Rightarrow \lambda = \bar{\lambda} \Rightarrow \lambda \in \mathbb{R}
+ \end{equation}
+ 
+ 
+(2):
+
+ Assume
+$\lambda_i \neq \lambda_j$
+The definition of eigenvalues and eigenvectors is
+\begin{eqnarray}
+Ax_i = x_i\lambda_i \\
+Ax_j = x_j\lambda_j
+\end{eqnarray}
+By left side multiplication with $x_j$ and $x_i$ one gets
+\begin{eqnarray}
+x_jAx_i = x_jx_i\lambda_i \\
+x_iAx_j = x_ix_j\lambda_j
+\end{eqnarray}
+ Subtracting the equations leads to
+ \begin{equation}
+ x_jAx_i - x_iAx_j = x_jx_i\lambda_i - x_ix_j\lambda_j
+\end{equation}  
+Because of the symmetry of A, the left side of the equation solves to zero.
+\begin{equation}
+ 0 = x_jx_i\lambda_i - x_ix_j\lambda_j = (\lambda_i-\lambda_j)(x_ix_j)
+\end{equation}
+As $\lambda_i-\lambda_j$ cannot be zero, due to the first assumption ($\lambda_i \neq \lambda_j$), the right part of the term ($x_ix_J$) has to be zero. By definition, this means, that $x_i$ and $x_j$ are orthogonal.
+
+
+
+
+
+\section{Assignment}		%4
+$B \in \mathbb{R}^{n \times n}$ is a real symmetric matrix with distinct eigenvalues $\lambda_1, \lambda_2, \lambda_n$.
+
+To show:
+\begin{eqnarray}
+(1)\;\;\; |B|=\prod_i \lambda_i\\
+(2) \;\;\; tr(B) = \sum_i \lambda_i
+\end{eqnarray}
+
+(1):
+
+Since $B$ is a real symmetric matrix with distinct eigenvalues, its eigenvectors are orthogonal (see Assignment 3). Therefore, the eigenvectors are linearly independent, which means that it is possible to diagonalize the $B$.
+
+In addition, we know that the determinant of a diagonal matrix is the same as the multiplication of all values on the diagonal.
+
+Let $U$ and $D$ be matrices as defined in Assignment 2.
+\begin{eqnarray}
+B &=& UDU^{-1}\\
+|B| &=& |UDU^{-1}|\\
+|B| &=& |U||D||U^{-1}|\\
+|B| &=& |U||D||U|^{-1}\\
+|B| &=& \frac{|U|}{|U|}|D|\\
+|B| &=& |D|\\
+|B| &=& \prod_i \lambda_i
+\end{eqnarray}
+
+(2):
+
+We use the same facts described in (1):
+\begin{eqnarray}
+B &=& UDU^{-1}\\
+tr(B) &=& tr(UDU^{-1})\\
+tr(B) &=& tr(U^{-1}UD)\\
+tr(B) &=& tr(D)\\
+tr(B) &=& \sum_i \lambda_i
+\end{eqnarray}
+
+\section{Assignment}		%5
+A hypreplane or affine set $H \in \mathbb{R}^n$ defined by the equation $h(x) \equiv w_0 + w^Tx = 0$.
+
+To show:
+\begin{enumerate}
+\item for any point $x_0 \in H, w^Tx_0=-w_0$.
+\item if $x_1$ and $x_2$ lie in $H$, then $w^T(x_1-x_2)=0$.
+\item $\hat{w}=w/||w||$ is the vector normal to the surface of $H$.
+\item if $x_0 \in H$, then the sgned distance of any point $x$ to $H$ is given by $\hat{w}^T(x-x_0) = (w^Tx+w_0)/||w||$
+\end{enumerate}  
+
+(1):
+
+\begin{eqnarray}
+h(x_0) \equiv w_0 + w^T x_0 &=& 0\\
+w^T x_0 &=& -w_0
+\end{eqnarray}
+
+(2):
+
+\begin{eqnarray}
+h(x_1) \equiv w_0 + w^T x_1 = 0 \label{x1}\\
+h(x_2) \equiv w_0 + w^T x_2 = 0 \label{x2}
+\end{eqnarray}
+With \ref{x1} - \ref{x2}:
+\begin{eqnarray}
+w_0 + w^Tx_1-w_0-w^Tx_2 = 0\\
+w^T(x_1-x_2)=0
+\end{eqnarray}
+
+(3):
+
+Let $v \in H$. The scalar product of $v$ and $\hat{w}$ has to be zero since all vectors in H have to be orthonogal to $\hat{w}$. Let $x_1, x_2 \in H$ and represent $v$ as a linear combination of $x_1$ and $x_2$ so that $v = x_1 - x_2$.
+
+\begin{eqnarray}
+<\hat{w}, v> = \hat{w}^T v = \hat{w}^T (x_1-x_2) = 0\\
+\Leftrightarrow \frac{w^T}{||w||}(x_1-x_2) = 0
+\end{eqnarray}
+
+We know that it is equal to zero due to the knowledge of (2).
+
+(4):
+
+Computing the distance $d$ of a point $x$ to $H$ can be computed using the projection so that $d = \frac{<\hat{w},(x-x_0)>}{||\hat{w}||}$. Since $\hat{w}$ is already normalized to a length of 1, the equation can be transformed to $\hat{w}^T (x-x_0)$.
+\begin{eqnarray}
+\hat{w}^T(x-x_0) &=& \frac{w^Tx+w_0}{||w||}\\
+\frac{w^T}{||w||}(x-x_0) &=& \frac{w^Tx+w_0}{||w||}\\
+w^T(x-x_0) &=& w^Tx+w_0\\
+\end{eqnarray}
+with $-w_0 = w^Tx_0$:
+\begin{eqnarray}
+w^T (x-x_0) &=& w^Tx -w^T x_0\\
+w^T (x-x_0) &=& w^T (x-x_0)
+\end{eqnarray}
+
+\end{document}

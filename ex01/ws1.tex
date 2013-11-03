@@ -1,0 +1,82 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Seitz Andre}
+\title{ML Worksheet1}
+\begin{document}
+\section{Problem 1}
+For calculation of eigenvalues and eigenvectors of the given matrix A
+\begin{equation}
+det(A-\lambda I) = 0
+\end{equation}
+was used. First the eigenvalues $\lambda$ were calculated.
+\begin{eqnarray}
+det ( A - \lambda I ) = 0 \\
+det ( \left(
+\begin{array}{ccc}
+2 & -1 & 0 \\
+-1 & 2 & -1 \\
+0 & -1 & 2
+\end{array}
+\right) - \lambda I ) = 0 \\
+\left|
+\begin{array}{ccc}
+2-\lambda & -1 & 0 \\
+-1 & 2-\lambda & -1 \\
+0 & -1 & 2-\lambda 
+\end{array}
+\right| = 0 \\
+(2-\lambda) \cdot \left|
+\begin{array}{cc}
+2-\lambda & -1 \\
+-1 & 2-\lambda 
+\end{array} \right|
+- (-1) \cdot \left|
+\begin{array}{cc}
+-1 & 0 \\
+-1 & 2-\lambda
+\end{array} \right| = 0 \\
+(2-\lambda)\cdot((2-\lambda)^2-1)+(-1)\cdot(2-\lambda)-0\cdot(-1) = 0\\
+(2-\lambda)\cdot((2-\lambda)^2-1)+(-1)\cdot(2-\lambda) = 0
+\end{eqnarray}
+By division through $(2- \lambda)$ the first $\lambda$ can be derived as $\lambda_1 = 2$.
+\begin{eqnarray}
+((2-\lambda)^2-1)+(-1) = 0 \\
+(2-\lambda)^2-2 = 0 \\
+\lambda^2-4\lambda+4-2 = 0 \\
+\lambda^2-4\lambda+2 = 0 \\
+\lambda_{2,3} = 2\pm \sqrt{2}
+\end{eqnarray}
+The eigenvectors of the corresponding eigenvalues can now be derived by using $(A - \lambda I)X = 0$. \\
+For $\lambda = 2$
+\begin{eqnarray}
+\left(
+\begin{array}{ccc}
+0 & -1 & 0 \\
+-1 & 0 & -1 \\
+0 & -1 & 0
+\end{array} \right) \cdot X = 0
+\end{eqnarray}
+resolves to the following system of linear equations:
+\begin{eqnarray}
+-x_2 = 0 \\
+-x_1 -x_3 = 0 \\
+-x_2 = 0
+\end{eqnarray}
+This system can be solved to
+\begin{eqnarray}
+x_2 = 0 \\
+x_1 = -x_3
+\end{eqnarray}
+and leads to the first eigenvectors
+\begin{equation}
+\left( \begin{array}{c}
+x_1 \\ 0 \\ -x_1
+\end{array} \right)
+\end{equation}
+
+\end{document}
