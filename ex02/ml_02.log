@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.8.27)  4 NOV 2013 17:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.8.27)  4 NOV 2013 17:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -303,7 +303,7 @@ control sequence to too much text. How can we recover?
 My plan is to forget the whole thing and hope for the best.
 
 (./python/knn/kNN.py [3]) (./python/knn/main.py [4])
-Underfull \vbox (badness 1596) has occurred while \output is active []
+Underfull \vbox (badness 1308) has occurred while \output is active []
 
  [5]
 [6] (./ml_02.aux) )
@@ -327,7 +327,7 @@ sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
 local/texlive/2013/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/te
 xlive/2013/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
 13/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
-Output written on ml_02.pdf (6 pages, 93821 bytes).
+Output written on ml_02.pdf (6 pages, 94087 bytes).
 PDF statistics:
  52 PDF objects out of 1000 (max. 8388607)
  36 compressed objects within 1 object stream
