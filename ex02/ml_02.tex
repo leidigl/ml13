@@ -29,37 +29,96 @@
 % puts 3 of 4 authors names on the first line, and the last on the second
 % line, try using \AND instead of \And before the third author name.
 
+%\usepackage{xyling}
+\usepackage{qtree}
+
+
+\usepackage{courier}
+\usepackage{listings}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         numberstyle=\tiny,          
+         numbersep=5pt,             
+         tabsize=2,                
+         extendedchars=true,      
+         breaklines=true,        
+         showspaces=false,      
+         showtabs=false,       
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         showstringspaces=false 
+ }
+ \lstloadlanguages{
+         Python
+ }
 
 
 \begin{document}
 \maketitle
 
 \section{Assignment: Learning by doing}
-\paragraph*{Problem 1}
+
+\paragraph*{Problem 1 and 2}
 $\;$ 
 
-sdfsdf
+Python code required for the solution:
+
+\lstinputlisting[language=python]{python/decision_tree/node.py}
+
+\lstinputlisting[language=python]{python/decision_tree/main.py}
+
+Results:
+
+1. Decision tree:
 
 
-\paragraph*{Problem 2}
+%\Tree{		& \K{$x_1 \leq 4.1$} \B{dl}\B{dr}\\ 
+%\K{[0,6,0]} &					& \K{$x_1 \leq 6.9$}\B{dl}\B{dr}\\
+%&					\K{[2,0,4]} &					& \K{[3,0,0]}}
+
+
+\Tree [.{$x_1\leq4.1$ \\ g=0.658}
+	{$[0,6,0]$ \\ g=0} 
+	[.{$x_1\leq6.9$ \\ g=0.6494 
+		{$[2,0,4]$ \\ g=0.444} 
+		{$[3,0,0]$ \\ g=0} ] ]
+		
+		
+		
+2. Classification:
+
+[ 4.1 -0.1  2.2] belongs to class [1] with a probability of 1.0.
+
+[ 6.1  0.4  1.3] belongs to class [2] with a probability of $\frac{1}{3}$.
+
+\paragraph*{Problem 3 and 4}
 $\;$ 
 
-sdfd
+Python code required for the solution:
 
-\paragraph*{Problem 3}
-$\;$ 
+\lstinputlisting[language=python]{python/knn/kNN.py}
 
-sdfd
+\lstinputlisting[language=python]{python/knn/main.py}
 
-\paragraph*{Problem 4}
-$\;$ 
+Results:
 
-sdfd
+1. KNN:
+
+[ 4.1 -0.1  2.2] belongs to class [0 1 2] with a probability of 0.333333333333
+[ 6.1  0.4  1.3] belongs to class [2] with a probability of 0.666666666667
+
+2. KNN Regression:
+
+Regression for [ 4.1 -0.1  2.2] results in 0.561.
+
+Regression for [ 6.1  0.4  1.3] results in 1.396.
 
 \paragraph*{Problem 5}
 $\;$ 
 
-The values of the second column are much smaller than the values of the first and third column. Scaling the data could compensate this problem affecting the euclidian distance.
+The values of the second column are much smaller than the values of the first and third column. Scaling the data could compensate this problem affecting the euclidian distance (standardization).
 
 This problem does not arise when training a decision tree since only one feature is considered for splitting the set at a time. Therefore, only the relative differences within each column are important.
 
