@@ -29,6 +29,7 @@
 % puts 3 of 4 authors names on the first line, and the last on the second
 % line, try using \AND instead of \And before the third author name.
 
+\usepackage{MnSymbol}
 
 
 \begin{document}
@@ -38,11 +39,63 @@
 \paragraph*{Problem 1}
 $\;$ 
 
+$T \hateq $ terrorist and $\neg T \hateq $ not a terrorist\\
+$S \hateq $ positive scan as terrorist and $\neg S \hateq $ negative scan as terrorist
+
+The following information about probabilities are included in the text:
+
+$p(T) = 0.01$, $p(\neg T) = 0.99$\\
+$p(S|T) = 0.95$, $p(\neg S|T) = 0.05$\\
+$p(\neg S|\neg T) = 0.95$, $p(S|\neg T) = 0.05$
+
+To find: $p(T|S)$
+
+\begin{eqnarray}
+p(T|S)&=&\frac{p(S|T)p(T)}{p(S)}\\
+&=&\frac{p(S|T)p(T)}{p(S|T)p(T)+p(S|\neg T)p(\neg T)}\\
+&=&\frac{0.95\cdot 0.01}{0.95\cdot 0.01 + 0.05 \cdot 0.99}\\
+&\approx & 0.161 
+\end{eqnarray}
+
+
 \paragraph*{Problem 2}
 $\;$ 
 
+$B \hateq $ Box and $D \hateq $ Drawn\\
+$r \hateq $ red and $w \hateq $ white
+
+To find: $p(B = 2red|D = 3 red)$
+
+\begin{eqnarray}
+p(B = 2r|D = 3r) &=& \frac{p(D = 3r |B = 2r)p(B = 2r)}{p(D = 3r)}\\
+&=&\frac{p(D = 3r |B = 2r)p(B = 2r)}{p(D = 3r|B = 2r)p(B = 2r)+p(D = 3r|B = 2w)p(B = 2w)+ p(D = 3r|B = 1r1w)p(B = 1r1w)}\\
+&=&\frac{1\cdot (0.5 \cdot 0.5)}{1\cdot (0.5 \cdot 0.5) + 0 \cdot (0.5 \cdot 0.5) + (0.5 \cdot 0.5 \cdot 0.5) \cdot (2 \cdot 0.5 \cdot 0.5)}\\
+&=&\frac{0.25}{0.25 + 0.125 \cdot 0.5}\\
+&=& \frac{0.25}{0.3125}\\
+&=& 0.8
+\end{eqnarray}
+
+
 \paragraph*{Problem 3}
 $\;$ 
+
+Mean:
+\begin{eqnarray}
+E[X] &=& \int_{-\infty}^{\infty}x \cdot p(x) dx\\
+&=& \int_0^1 x \cdot 1\\
+&=& \left[ \frac{1}{2} x^2\right] _0^1\\
+&=& \frac{1}{2} - 0\\
+&=& \frac{1}{2}
+\end{eqnarray}
+
+Variance:
+\begin{eqnarray}
+Var[X] &=& E[X^2] - E[X]^2\\
+&=& \int_{-\infty}^{\infty}x^2 \cdot p(x) dx - \left(\frac{1}{2}\right)^2\\
+&=& \left[\frac{1}{3} x^3\right]_0^1 - \frac{1}{4}\\
+&=& \frac{1}{3} - 0 - \frac{1}{4}\\
+&=& \frac{1}{12}
+\end{eqnarray}
 
 \paragraph*{Problem 4}
 $\;$ 
