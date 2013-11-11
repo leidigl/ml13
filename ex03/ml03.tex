@@ -107,6 +107,44 @@ $\;$
 \paragraph*{Problem 5}
 $\;$ 
 
+To show:
+\begin{eqnarray}
+P(X > c) \leq \frac{E[X]}{c}
+\end{eqnarray}
+
+\begin{eqnarray}
+P(X > c) &\leq& \frac{E[X]}{c}\\
+\sum_{x>c}{p(x)} &\leq& \frac{\sum_{x}{x \cdot p(x)}}{c}\\
+\sum_{x>c}{p(x)} &\leq& \frac{\sum_{x\leq c}{x \cdot p(x)} + \sum_{x>c}{x \cdot p(x)}}{c}\\
+0 &\leq& \frac{\sum_{x\leq c}{x \cdot p(x)} + \sum_{x>c}{x \cdot p(x)}}{c} - \sum_{x>c}{p(x)}\\
+0 &\leq& \sum_{x\leq c}{x \cdot p(x)} + \sum_{x>c}{x \cdot p(x)} - \sum_{x>c}{ c \cdot p(x)} \label{3sums}
+\end{eqnarray}
+
+The first sum in the right term of inequality \ref{3sums} is greater 0 since the random variable is non-negative and probabilities are always greater than 0.
+
+For the second and third sum the following holds:
+
+\begin{eqnarray}
+\sum_{x>c}{ c \cdot p(x)} &\leq& \sum_{x>c}{x \cdot p(x)}
+\end{eqnarray}
+since each element of the right sum is greater than the corresponding element of the left due to the relation $x > c$. Therefore,
+\begin{eqnarray}
+0 \leq \sum_{x>c}{x \cdot p(x)} - \sum_{x>c}{ c \cdot p(x)}
+\end{eqnarray}
+This proves that the relation in inequality \ref{3sums} is correct. Therefore, the Markov inequality is proved.
+
+Application of the Markov inequality:
+
+Let X be a random variable for drawing a head by flipping a fair coin.
+\begin{eqnarray}
+P(X > \frac{3}{4}n) \leq \frac{E[X]}{\frac{3}{4}n}
+\end{eqnarray}
+With $E[X] = \frac{1}{2}n$ we get:
+\begin{eqnarray}
+P(X > \frac{3}{4}n) \leq \frac{\frac{1}{2}n}{\frac{3}{4}n} = \frac{2}{3}
+\end{eqnarray}
+
+
 \subsection{Chebyshev Inequality}
 
 \paragraph*{Problem 6}
@@ -119,8 +157,5 @@ $\;$
 
 
 
-
-\section{Assignment: a shorter solution to Fermat's last theorem }
-Assignment 3 is solved, but takes too much space to write down here.
 
 \end{document}
