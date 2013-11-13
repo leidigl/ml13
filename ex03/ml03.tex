@@ -99,18 +99,28 @@ Var[X] &=& E[X^2] - E[X]^2\\
 
 \paragraph*{Problem 4}
 $\;$ 
-\\
+
 \textbf{Equation 1:}
-\\
+
+\begin{eqnarray}
+E[X] &=& \int_{-\infty}^{\infty}{x \cdot p(x)} dx \\
+&=& \int_{-\infty}^{\infty}{x \int_{-\infty}^{\infty}{p_{X,Y}(x,y)} dy} dx\\
+&=& \int_{-\infty}^{\infty}{x \int_{-\infty}^{\infty}{p_Y(y)\cdot p_{X|Y}(x|y)} dy} dx\\
+&=& \int_{-\infty}^{\infty}{p_Y(y) \int_{-\infty}^{\infty}{x \cdot p_{X|Y}(x|y)} dx} dy\\
+&=& \int_{-\infty}^{\infty}{p_Y(y) E_{X|Y}[X]} dy\\
+&=& E_Y[E_{X|Y}[X]]
+\end{eqnarray}
+
 \textbf{Equation 2:}
-\\
+
 With usage of equation1: 
 \begin{eqnarray}
-E_y[Var_{X\|Y}(X)] + Var_y[E_{X\|Y}(X)] &=& \\
-E_y[E_{X\|Y}(X^2) - E_{X\|Y}(X)^2] + E_y[E_{X\|Y}(X)^2] - E_y[E_{X\|Y}(X)]^2  &=& \\
-E_y[E_{X\|Y}(X^2)] - E_y[E_{X\|Y}(X)^2] + E_y[E_{X\|Y}(X)^2] - E_y[E_{X\|Y}(X)]^2  &=& \\
-E_y[E_{X\|Y}(X^2)] - E_y[E_{X\|Y}(X)]^2  &=& \\
-E[X^2] - E[X]^2
+E_Y[Var_{X|Y}(X)] + Var_Y[E_{X|Y}(X)] &=& \\
+E_Y[E_{X|Y}(X^2) - E_{X|Y}(X)^2] + E_Y[E_{X|Y}(X)^2] - E_Y[E_{X|Y}(X)]^2  &=& \\
+E_Y[E_{X|Y}(X^2)] - E_Y[E_{X|Y}(X)^2] + E_Y[E_{X|Y}(X)^2] - E_Y[E_{X|Y}(X)]^2  &=& \\
+E_Y[E_{X|Y}(X^2)] - E_Y[E_{X|Y}(X)]^2  &=& \\
+E[X^2] - E[X]^2 &=&\\
+Var[X]
 \end{eqnarray}
 
 \section{Assignment: Probability Inequalities}
@@ -147,7 +157,7 @@ This proves that the relation in inequality \ref{3sums} is correct. Therefore, t
 
 Application of the Markov inequality:
 
-Let X be a random variable for drawing a head by flipping a fair coin.
+Let X be a random variable for drawing a head by flipping a fair coin n times.
 \begin{eqnarray}
 P(X > \frac{3}{4}n) \leq \frac{E[X]}{\frac{3}{4}n}
 \end{eqnarray}
@@ -161,6 +171,37 @@ P(X > \frac{3}{4}n) \leq \frac{\frac{1}{2}n}{\frac{3}{4}n} = \frac{2}{3}
 
 \paragraph*{Problem 6}
 $\;$ 
+
+To show:
+\begin{eqnarray}
+P(|X - E[X]| > a) \leq \frac{Var[X]}{a^2}
+\end{eqnarray}
+
+From the Markov inequality we know:
+\begin{eqnarray}
+P(X > a) \leq \frac{E[X]}{a}
+\end{eqnarray}
+
+Computing $P(|X - E[X]| > a) = P((X - E[X])^2 > a^2)$ using the Markov inequality leads to the following:
+\begin{eqnarray}
+P(X > a) &\leq& \frac{E[X]}{a}\\
+\Leftrightarrow P((X - E[X])^2 > a^2) &\leq& \frac{E[(X - E[X])^2]}{a^2}\\
+\Leftrightarrow P(|X - E[X]| > a) &\leq& \frac{Var[X]}{a^2}
+\end{eqnarray}
+
+
+Application of the Chebyshev inequality:
+
+Let X be a random variable for drawing a head by flipping a fair coin n times.
+\begin{eqnarray}
+E[X] = \frac{1}{2}n\\
+Var[X] = \frac{1}{4}n
+\end{eqnarray}
+With this we get:
+\begin{eqnarray}
+P(X > \frac{3}{4}n) = P\left(\left|X-\frac{1}{2}n\right| > \frac{1}{4}n\right) \leq \frac{\frac{1}{4}n}{\left(\frac{1}{4}n\right)^2} = \frac{4}{n}
+\end{eqnarray}
+
 
 \subsection{Jensen's Inequality}
 
