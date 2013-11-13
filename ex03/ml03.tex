@@ -190,7 +190,7 @@ P(X > a) &\leq& \frac{E[X]}{a}\\
 \end{eqnarray}
 
 
-Application of the Chebyshev inequality:
+Application of the Cheybyshev inequality:
 
 Let X be a random variable for drawing a head by flipping a fair coin n times.
 \begin{eqnarray}
@@ -207,6 +207,21 @@ P(X > \frac{3}{4}n) = P\left(\left|X-\frac{1}{2}n\right| > \frac{1}{4}n\right) \
 
 \paragraph*{Problem 7}
 $\;$ 
+
+\textbf{I-Begin} ($n=2$): obvious per definition of convex functions\\
+\textbf{I-Statement} ($n$): Assume
+\begin{eqnarray}
+f(\lambda_1 x_1+\dots + \lambda_n x_n) \leq \lambda f(x_1) + \dots +\lambda_n f(x_n)
+\end{eqnarray}
+\textbf{I-Step} ($n \leftarrow n+1$):
+\begin{eqnarray}
+f(\lambda_1 x_1 + \dots +\lambda_n x_n + \lambda_{n+1} x_{n+1}) &=& \\
+f(\sum_{i=1}^{n+1} \lambda_i x_i) &=& \\
+f(\lambda_1 x_1 + \sum_{i=2}^{n+1} \lambda_ix_i) &=& \\
+f(\lambda_1 x_1 + (1-\lambda_1)\sum_{i=2}^{n+1} \frac{\lambda_i}{1-\lambda_1}x_i) &\leq & \\
+\lambda_1 f(x_1) + (1-\lambda_1)f(\sum_{i=2}^{n+1} \frac{\lambda_i}{1-\lambda_1}x_i) &\leq & 
+\sum_{i=1}^{n+1}\lambda_i f(x_i)
+\end{eqnarray}
 
 
 
