@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{ml1_homework_template}
+\usepackage{amsmath}
 
 % please submit the corresponding pdf by email to
 % homework@class,brml.org, and write "homework sheet xx" in the 
@@ -37,21 +38,138 @@
 \section{Assignment: Still refreshing ...}
 \paragraph*{Problem 1}
 $\;$ 
+As the coin is only flipped until one head is thrown, only one head is expected per experiment.
+\begin{eqnarray}
+E[H] = 1
+\end{eqnarray}
+The expectation for the number of tails thrown can be calculated as follows:
+\begin{eqnarray}
+E[T] &=& \sum_{x=1}^{n}x\cdot p_x(X)\\
+ &=& \sum_{x=1}^{n}x \cdot p \cdot (1-p)^{x-1}\\
+ &=& (1-p) \cdot \sum_{x=1}^{n} x \cdot p \cdot \frac{(1-p)^{x-1}}{(1-p)}\\
+ &=& (1-p) \cdot \sum_{x=0}^{n} (x+1) \cdot p \cdot \frac{(1-p)^x}{(1-p)}\\
+ &=& (1-p) \cdot [\sum_{x=1}^{n}(x \cdot p \cdot \frac{(1-p)^x}{(1-p)}) + (0 \cdot p \cdot \frac{(1-p)^0}{1-p}) + (\sum_{x=0}^n 1 \cdot p \cdot \frac{(1-p)^x}{(1-p)})]\\ 
+ &=& (1-p) \cdot [\sum_{x=1}^{n}(x \cdot p \cdot \frac{(1-p)^x}{(1-p)}) + (\sum_{x=0}^n p \cdot (1-p)^{x-1})]\\ 
+ &=& (1-p) \cdot [\sum_{x=1}^{n}(x \cdot p \cdot \frac{(1-p)^x}{(1-p)}) + 1]\\ 
+ &=& (1-p) \cdot [\sum_{x=1}^{n}(x \cdot p \cdot (1-p)^{x-1}) + 1]\\
+ &=& (1-p) \cdot E[T] + 1]\\
+&& E[T] - (1-p) \cdot E[T] = 1\\
+&& (1-(1-p)) \cdot E[T] = 1 \\
+E[T] &=&\frac{1}{1-(1-p)} = \frac{1}{1-1+p} = \frac{1}{p}
+\end{eqnarray}
+As the coin is thought to be fair
+\begin{eqnarray}
+p = \frac{1}{2} \Rightarrow E[T] = 2
+\end{eqnarray}
 
 \paragraph*{Problem 2}
-$\;$ 
-
+The probability, that Alice is using urn $u$:
+\begin{eqnarray}
+P(U = u | n_B = 3,N = 10) &=& \frac{P(n_B = 3, N = 10 | U = u) \cdot P(U = u)}{P(n_B = 3, N = 10)}\\
+&=& \frac{	(\frac{u}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}\cdot \frac{1}{11}}{\frac{1}{11} \cdot \sum_{i=0}^{10} (\frac{u_i}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}}\\
+&=& \frac{	(\frac{u}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}}{\sum_{i=0}^{10} (\frac{u_i}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}}\\
+\end{eqnarray}
+The probability, that the next drawn ball is black is:
+\begin{eqnarray}
+P(B_{N+1} | n_B, N) &=& \sum_{u=0}^{10} P(B_{N+1} | U=u,n_B = 3,N = 10) \cdot P(U=u | n_B = 3, N = 10)\\
+&=& \sum_{u=0}^{10} \frac{u}{10} \cdot \frac{(\frac{u}{10})^3 \cdot (1-\frac{u}{10})^7}{\sum_{u=0}^{10}(\frac{u}{10})^3(1-\frac{u}{10})^7}\\
+&=& \frac{\sum_{u=0}^{10} \frac{u}{10} \cdot (\frac{u}{10})^3 \cdot (1-\frac{u}{10})^7}{\sum_{i=0}^{10}(\frac{u}{10})^3(1-\frac{u}{10})^7}\\
+&=& \frac{\sum_{u=0}^{10} (\frac{u}{10})^4 \cdot (1-\frac{u}{10})^7}{\sum_{i=0}^{10}(\frac{u}{10})^3(1-\frac{u}{10})^7}\\
+&=& \frac{\sum_{u=0}^{10} \frac{u^4}{10^4} \cdot \frac{(10-u)^7}{10^7}}{\sum_{i=0}^{10} \frac{u^3}{10^3}\frac{(10-u)^7}{10^7}}\\
+&=& \frac{\frac{1}{10^11}}{\frac{1}{10^10}} \frac{\sum_{u=0}^{10} u^4 \cdot (10-u)^7}{\sum_{i=0}^{10} u^3 \cdot (10-u)^7}\\
+&=& \frac{1}{10} \frac{\sum_{u=0}^{10} u^4 \cdot (10-u)^7}{\sum_{i=0}^{10} u^3 \cdot (10-u)^7}\\
+&\approx & 0.33 
+\end{eqnarray}
 \section{Assignment: Parameter Estimation}
 \subsection{Coins}
 
 \paragraph*{Problem 3}
-$\;$ 
-
-\paragraph*{Problem 3}
-$\;$ 
-
+Determination of MLE for $\theta$:
+\begin{eqnarray}
+P(X=x | \theta) &=& f(x|\theta) = \theta^x \cdot (1-\theta)^{1-x}\\
+L(\theta | X = x_{1 .. n}) &=& f(x_{1 .. n} | \theta) = \prod_{i=1}^{n} f(x_i | \theta)\\
+l(\theta | X = x_{1 .. n}) &=& ln L(\theta | X = x_{1 .. n})\\
+ &=& ln \prod_{i=1}^{n} f(x_i | \theta)\\
+ &=& \sum_{i=1}^{n} ln (\theta ^x_i \cdot (1-\theta)^{1-x_i})\\
+ &=& \sum_{i=1}^{n} x_i \cdot ln(\theta) + (1-x_i) \cdot ln(1-\theta)\\
+l' &=& \sum_{i=1}^n x_i \cdot \frac{1}{\theta} + (1-x_i) \cdot \frac{-1}{1-\theta} \overset{!}{=} 0\\
+&& \sum_{i=0}^n x_i \cdot \frac{1}{\theta} = \sum_{i=0}^n (1-x_i) \cdot \frac{1}{1-\theta} \\
+&& n \cdot \frac{1}{\theta} \sum_{i=1}^n x_i = n \cdot \frac{1}{1-\theta} \sum_{i=1}^n 1-x_i\\
+&& n \cdot (1-\theta) \sum_{i=1}^n x_i = n \cdot \theta \sum_{i=1}^n 1-x_i\\
+&& (n-n\cdot \theta) \sum_{i=1}^n x_i = n \cdot \theta \sum_{i=1}^n 1-x_i\\
+&& n \cdot \sum_{i=0}^n - n \cdot \theta \cdot \sum_{i=0}^n = n \cdot \theta \cdot n - n \cdot \theta \cdot \sum_{i=0}^n\\
+&& n \cdot \sum_{i=0}^n = n \cdot \theta \cdot n\\
+&& \sum_{i=0}^n = \theta \cdot n\\
+\hat{l} &=& \hat{\theta} = \frac{\sum_{i=1}^n x_i}{n}
+\end{eqnarray}
+To ensure to have calculated a maximum for $l(\theta | X = x_{1 .. n})$ the second derivative can be calculated and checked if negative in the optimum. Therefore we denote $|T|$ as the "number of Tails" $|T|=\sum_{i=0}^n$:
+\begin{eqnarray}
+l'' &=& -\frac{|T|}{\theta^2} - (n-|T|)(-1)(1-\theta)^-2(-1)\\
+&=& -\frac{|T|}{\theta^2} - \frac{n-|T|}{(1-\theta)^2}
+\end{eqnarray}
+By using the previously calculated MLE, one gets:
+\begin{eqnarray}
+-\frac{n^2}{|T|}-\frac{n-|T|}{(1-\frac{|T|}{n})^2} <0
+\end{eqnarray}
+which is true, as $-\frac{n^2}{|T|}$ is smaller than 0, as well as $\frac{n-|T|}{(1-\frac{T}{n})^2}$, because of $n-T$ and $(1-\frac{T}{n})^2$ obviously being greater than 0.
+\paragraph*{Problem 4}
+Given the Binomial distribution and its MLE from problem 3:
+\begin{eqnarray}
+p(X=m | N,\mu) = {N \choose m} \cdot \mu ^m (1- \mu)^{N-m}\\
+N = m+l\\
+\hat{l} = \frac{m}{m+l}
+\end{eqnarray}
+and the Beta distribution as prior and its mean:
+\begin{eqnarray}
+p(\mu | a,b) = \frac{\Gamma(a+b)}{\Gamma(a) \cdot \Gamma(b)} \cdot \mu^{a-1} \cdot (1-\mu)^{b-1}\\
+\frac{a}{a+b}
+\end{eqnarray}
+one can calculate the posterior:
+\begin{eqnarray}
+p(\mu | m,N) &=& \frac{p(X=m | N,\mu) \cdot p(\mu | a,b)}{p(m,N)}\\
+ &=&  \frac{\frac{\Gamma(a+b)}{\Gamma(a)\cdot \Gamma(b)} \cdot \mu ^{a-1} (1-\mu)^{b-1} \mu^{m} (1-\mu)^l}{\frac{\Gamma(a+b)}{\Gamma(a)\cdot \Gamma(b)} \cdot \int \mu^{a-1} (1-\mu)^{b-1}\mu^m(1-\mu)^l} \\
+ &=&  \frac{\mu ^{a-1} (1-\mu)^{b-1} \mu^{m} (1-\mu)^l}{\int \mu^{a-1} (1-\mu)^{b-1}\mu^m(1-\mu)^l} \\
+  &=&  \frac{\mu ^{m+a-1} (1-\mu)^{l+b-1}}{\int \mu^{m+a-1} (1-\mu)^{l+b-1}} \\
+\end{eqnarray}
+By reverse engineering one can state for the Beta distribution:
+\begin{eqnarray}
+\int \frac{\Gamma(a+b)}{\Gamma(a) \cdot \Gamma(b)} \cdot \mu^{a-1} \cdot (1-\mu)^{b-1} &=& 1\\
+ \frac{\Gamma(a+b)}{\Gamma(a) \cdot \Gamma(b)} \cdot \int  \mu^{a-1} \cdot (1-\mu)^{b-1} &=& 1\\
+ \int  \mu^{a-1} \cdot (1-\mu)^{b-1} &=& \frac{\Gamma(a) \cdot \Gamma(b)}{\Gamma(a+b)}\\
+\end{eqnarray}
+Regarding $a-1$ as $m+a-1$ and $b-1$ as $l+b-1$, one gets:
+\begin{eqnarray}
+\frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \cdot \Gamma(l+b)}\mu^{m+a-1}(1-\mu)^{l+b-1}
+\end{eqnarray}
+which is the posterior and a gamma distribution.\\
+The posterior mean calculates as follows:
+\begin{eqnarray}
+\int_0^1 \mu \frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \Gamma(l+b)} \cdot \mu^{m+a-1} \cdot (1-\mu)^{l+b-1} &=&\\
+\int_0^1 \frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \Gamma(l+b)} \cdot \mu^{m+a} \cdot (1-\mu)^{l+b-1} &=&\\
+\frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \Gamma(l+b)} \cdot \int_0^1 \mu^{m+a} \cdot (1-\mu)^{l+b-1} &=&\\
+\frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \Gamma(l+b)} \frac{\Gamma(m+a+1)\Gamma(l+b)}{\Gamma(m+a+1+b+l)} &=&\\
+\frac{m+a}{m+a+b+l}\\
+\end{eqnarray}
+To prove, that the posterior mean is between the prior mean and the MLE, the following equation has to be shown:
+\begin{eqnarray}
+\frac{m+a}{m+a+b+l} &=& \lambda \cdot (\frac{a}{a+b}) + (1-\lambda)\cdot (\frac{m}{m+l})\\
+\frac{m+a}{m+a+b+l} &=& \frac{\lambda \cdot a}{a+b} + \frac{m}{m+b} - \frac{\lambda \cdot m}{m+l}\\
+\end{eqnarray}
+To determine $\lambda$ and $(1-\lambda)$ we derive from $\frac{m+a}{m+a+b+l}$:
+\begin{eqnarray}
+\frac{m+a}{m+a+b+l} &=&\\
+\frac{m}{m+a+b+l} + \frac{a}{m+a+b+l} &=&\\
+\frac{m}{m+l} \cdot \frac{m+l}{m} \cdot \frac{m}{m+a+b+l} + \frac{a}{a+b} \cdot \frac{a+b}{a} \cdot \frac{a}{m+a+b+l} &=&\\
+\frac{m\cdot(m+l)}{m\cdot(m+a+b+l)} \cdot \frac{m}{m+l} + \frac{a\cdot(a+b)}{a\cdot(m+a+b+l)}\cdot \frac{a}{a+b} &=&\\
+\frac{a+b}{m+a+b+l}\cdot\frac{a}{a+b} + \frac{m+l}{m+a+b+l}\cdot\frac{m}{m+l}
+\end{eqnarray}
+stating that
+\begin{eqnarray}
+\lambda = \frac{a+b}{m+a+b+l}\\
+1-\lambda = \frac{m+l}{m+a+b+l}
+\end{eqnarray}
 \subsection{Poisson distribution}
-\paragraph*{Problem 3}
+\paragraph*{Problem 5}
 $\;$ 
 
 
