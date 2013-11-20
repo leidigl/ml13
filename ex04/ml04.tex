@@ -38,36 +38,45 @@
 \section{Assignment: Still refreshing ...}
 \paragraph*{Problem 1}
 $\;$ 
+
+Let X be a random variable that describes the number of flips until the first head occurs including this last flip.\\
 As the coin is only flipped until one head is thrown, only one head is expected per experiment.
 \begin{eqnarray}
 E[H] = 1
 \end{eqnarray}
 The expectation for the number of tails thrown can be calculated as follows:
 \begin{eqnarray}
-E[T] &=& \sum_{x=1}^{n}x\cdot p_x(X)\\
+E[X] &=& \sum_{x=1}^{n}x\cdot p_X(x)\\
  &=& \sum_{x=1}^{n}x \cdot p \cdot (1-p)^{x-1}\\
- &=& (1-p) \cdot \sum_{x=1}^{n} x \cdot p \cdot \frac{(1-p)^{x-1}}{(1-p)}\\
- &=& (1-p) \cdot \sum_{x=0}^{n} (x+1) \cdot p \cdot \frac{(1-p)^x}{(1-p)}\\
- &=& (1-p) \cdot [\sum_{x=1}^{n}(x \cdot p \cdot \frac{(1-p)^x}{(1-p)}) + (0 \cdot p \cdot \frac{(1-p)^0}{1-p}) + (\sum_{x=0}^n 1 \cdot p \cdot \frac{(1-p)^x}{(1-p)})]\\ 
- &=& (1-p) \cdot [\sum_{x=1}^{n}(x \cdot p \cdot \frac{(1-p)^x}{(1-p)}) + (\sum_{x=0}^n p \cdot (1-p)^{x-1})]\\ 
- &=& (1-p) \cdot [\sum_{x=1}^{n}(x \cdot p \cdot \frac{(1-p)^x}{(1-p)}) + 1]\\ 
- &=& (1-p) \cdot [\sum_{x=1}^{n}(x \cdot p \cdot (1-p)^{x-1}) + 1]\\
- &=& (1-p) \cdot E[T] + 1]\\
-&& E[T] - (1-p) \cdot E[T] = 1\\
-&& (1-(1-p)) \cdot E[T] = 1 \\
-E[T] &=&\frac{1}{1-(1-p)} = \frac{1}{1-1+p} = \frac{1}{p}
+&=& \sum_{x=0}^{n}(x+1) \cdot p \cdot (1-p)^{x}\\
+&=& \sum_{x=0}^{n} x \cdot p \cdot (1-p)^{x} + \sum_{x=0}^{n} \cdot p \cdot (1-p)^{x}\\
+&=& \sum_{x=0}^{n} x \cdot p \cdot (1-p)^{x} + \sum_{x=1}^{n} \cdot p \cdot (1-p)^{x}\\
+&=& \sum_{x=0}^{n} x \cdot p \cdot (1-p)^{x} + 1\\
+&=& (1-p) \cdot \sum_{x=0}^{n} x \cdot p \cdot (1-p)^{x-1} + 1
+\end{eqnarray}
+
+\begin{eqnarray}
+\Leftrightarrow E[X] &=& 1+(1-p)E[X]\\
+\Leftrightarrow 1 &=& \frac{1}{E[X]}+(1-p)\\
+\Leftrightarrow E[X] &=& \frac{1}{1-(1-p)} = \frac{1}{p}
 \end{eqnarray}
 As the coin is thought to be fair
 \begin{eqnarray}
-p = \frac{1}{2} \Rightarrow E[T] = 2
+p = \frac{1}{2} \Rightarrow E[X] = 2
+\end{eqnarray}
+Since one of this is a head the expected number of tails is
+\begin{eqnarray}
+E[T] = E[X] - 1 = 1
 \end{eqnarray}
 
 \paragraph*{Problem 2}
+$\;$ 
+
 The probability, that Alice is using urn $u$:
 \begin{eqnarray}
 P(U = u | n_B = 3,N = 10) &=& \frac{P(n_B = 3, N = 10 | U = u) \cdot P(U = u)}{P(n_B = 3, N = 10)}\\
 &=& \frac{	(\frac{u}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}\cdot \frac{1}{11}}{\frac{1}{11} \cdot \sum_{i=0}^{10} (\frac{u_i}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}}\\
-&=& \frac{	(\frac{u}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}}{\sum_{i=0}^{10} (\frac{u_i}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}}\\
+&=& \frac{	(\frac{u}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}}{\sum_{i=0}^{10} (\frac{u_i}{10})^{n_B} \cdot (\frac{10-u}{10})^{10-n_B}}
 \end{eqnarray}
 The probability, that the next drawn ball is black is:
 \begin{eqnarray}
@@ -84,27 +93,29 @@ P(B_{N+1} | n_B, N) &=& \sum_{u=0}^{10} P(B_{N+1} | U=u,n_B = 3,N = 10) \cdot P(
 \subsection{Coins}
 
 \paragraph*{Problem 3}
+$\;$ 
+
 Determination of MLE for $\theta$:
 \begin{eqnarray}
-P(X=x | \theta) &=& f(x|\theta) = \theta^x \cdot (1-\theta)^{1-x}\\
-L(\theta | X = x_{1 .. n}) &=& f(x_{1 .. n} | \theta) = \prod_{i=1}^{n} f(x_i | \theta)\\
+P(X=x | \theta) &=& p(x|\theta) = \theta^x \cdot (1-\theta)^{1-x}\\
+L(\theta | X = x_{1 .. n}) &=& p(x_{1 .. n} | \theta) = \prod_{i=1}^{n} p(x_i | \theta)\\
 l(\theta | X = x_{1 .. n}) &=& ln L(\theta | X = x_{1 .. n})\\
- &=& ln \prod_{i=1}^{n} f(x_i | \theta)\\
+ &=& ln \prod_{i=1}^{n} p(x_i | \theta)\\
  &=& \sum_{i=1}^{n} ln (\theta ^x_i \cdot (1-\theta)^{1-x_i})\\
  &=& \sum_{i=1}^{n} x_i \cdot ln(\theta) + (1-x_i) \cdot ln(1-\theta)\\
-l' &=& \sum_{i=1}^n x_i \cdot \frac{1}{\theta} + (1-x_i) \cdot \frac{-1}{1-\theta} \overset{!}{=} 0\\
+\frac{\delta l(\theta | X = x_{1 .. n})}{\delta \theta} &=& \sum_{i=1}^n x_i \cdot \frac{1}{\theta} + (1-x_i) \cdot \frac{-1}{1-\theta} \overset{!}{=} 0\\
 && \sum_{i=0}^n x_i \cdot \frac{1}{\theta} = \sum_{i=0}^n (1-x_i) \cdot \frac{1}{1-\theta} \\
 && n \cdot \frac{1}{\theta} \sum_{i=1}^n x_i = n \cdot \frac{1}{1-\theta} \sum_{i=1}^n 1-x_i\\
 && n \cdot (1-\theta) \sum_{i=1}^n x_i = n \cdot \theta \sum_{i=1}^n 1-x_i\\
 && (n-n\cdot \theta) \sum_{i=1}^n x_i = n \cdot \theta \sum_{i=1}^n 1-x_i\\
-&& n \cdot \sum_{i=0}^n - n \cdot \theta \cdot \sum_{i=0}^n = n \cdot \theta \cdot n - n \cdot \theta \cdot \sum_{i=0}^n\\
-&& n \cdot \sum_{i=0}^n = n \cdot \theta \cdot n\\
-&& \sum_{i=0}^n = \theta \cdot n\\
-\hat{l} &=& \hat{\theta} = \frac{\sum_{i=1}^n x_i}{n}
+&& n \cdot \sum_{i=0}^n x_i - n \cdot \theta \cdot \sum_{i=0}^n x_i= n \cdot \theta \cdot n - n \cdot \theta \cdot \sum_{i=0}^n x_i\\
+&& n \cdot \sum_{i=0}^n x_i = n \cdot \theta \cdot n\\
+&& \sum_{i=0}^n  x_i = \theta \cdot n\\
+\hat{\theta} &=& \frac{\sum_{i=1}^n x_i}{n}
 \end{eqnarray}
 To ensure to have calculated a maximum for $l(\theta | X = x_{1 .. n})$ the second derivative can be calculated and checked if negative in the optimum. Therefore we denote $|T|$ as the "number of Tails" $|T|=\sum_{i=0}^n$:
 \begin{eqnarray}
-l'' &=& -\frac{|T|}{\theta^2} - (n-|T|)(-1)(1-\theta)^-2(-1)\\
+\frac{\delta^2 l(\theta | X = x_{1 .. n})}{\delta \theta^2} &=& -\frac{|T|}{\theta^2} - (n-|T|)(-1)(1-\theta)^-2(-1)\\
 &=& -\frac{|T|}{\theta^2} - \frac{n-|T|}{(1-\theta)^2}
 \end{eqnarray}
 By using the previously calculated MLE, one gets:
@@ -112,7 +123,10 @@ By using the previously calculated MLE, one gets:
 -\frac{n^2}{|T|}-\frac{n-|T|}{(1-\frac{|T|}{n})^2} <0
 \end{eqnarray}
 which is true, as $-\frac{n^2}{|T|}$ is smaller than 0, as well as $\frac{n-|T|}{(1-\frac{T}{n})^2}$, because of $n-T$ and $(1-\frac{T}{n})^2$ obviously being greater than 0.
+
 \paragraph*{Problem 4}
+$\;$ 
+
 Given the Binomial distribution and its MLE from problem 3:
 \begin{eqnarray}
 p(X=m | N,\mu) = {N \choose m} \cdot \mu ^m (1- \mu)^{N-m}\\
@@ -129,7 +143,7 @@ one can calculate the posterior:
 p(\mu | m,N) &=& \frac{p(X=m | N,\mu) \cdot p(\mu | a,b)}{p(m,N)}\\
  &=&  \frac{\frac{\Gamma(a+b)}{\Gamma(a)\cdot \Gamma(b)} \cdot \mu ^{a-1} (1-\mu)^{b-1} \mu^{m} (1-\mu)^l}{\frac{\Gamma(a+b)}{\Gamma(a)\cdot \Gamma(b)} \cdot \int \mu^{a-1} (1-\mu)^{b-1}\mu^m(1-\mu)^l} \\
  &=&  \frac{\mu ^{a-1} (1-\mu)^{b-1} \mu^{m} (1-\mu)^l}{\int \mu^{a-1} (1-\mu)^{b-1}\mu^m(1-\mu)^l} \\
-  &=&  \frac{\mu ^{m+a-1} (1-\mu)^{l+b-1}}{\int \mu^{m+a-1} (1-\mu)^{l+b-1}} \\
+  &=&  \frac{\mu ^{m+a-1} (1-\mu)^{l+b-1}}{\int \mu^{m+a-1} (1-\mu)^{l+b-1}}
 \end{eqnarray}
 By reverse engineering one can state for the Beta distribution:
 \begin{eqnarray}
@@ -141,19 +155,20 @@ Regarding $a-1$ as $m+a-1$ and $b-1$ as $l+b-1$, one gets:
 \begin{eqnarray}
 \frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \cdot \Gamma(l+b)}\mu^{m+a-1}(1-\mu)^{l+b-1}
 \end{eqnarray}
-which is the posterior and a gamma distribution.\\
+which is the posterior and a gamma distribution.
+
 The posterior mean calculates as follows:
 \begin{eqnarray}
 \int_0^1 \mu \frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \Gamma(l+b)} \cdot \mu^{m+a-1} \cdot (1-\mu)^{l+b-1} &=&\\
 \int_0^1 \frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \Gamma(l+b)} \cdot \mu^{m+a} \cdot (1-\mu)^{l+b-1} &=&\\
 \frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \Gamma(l+b)} \cdot \int_0^1 \mu^{m+a} \cdot (1-\mu)^{l+b-1} &=&\\
 \frac{\Gamma(m+a+b+l)}{\Gamma(m+a) \Gamma(l+b)} \frac{\Gamma(m+a+1)\Gamma(l+b)}{\Gamma(m+a+1+b+l)} &=&\\
-\frac{m+a}{m+a+b+l}\\
+\frac{m+a}{m+a+b+l}
 \end{eqnarray}
 To prove, that the posterior mean is between the prior mean and the MLE, the following equation has to be shown:
 \begin{eqnarray}
 \frac{m+a}{m+a+b+l} &=& \lambda \cdot (\frac{a}{a+b}) + (1-\lambda)\cdot (\frac{m}{m+l})\\
-\frac{m+a}{m+a+b+l} &=& \frac{\lambda \cdot a}{a+b} + \frac{m}{m+b} - \frac{\lambda \cdot m}{m+l}\\
+\frac{m+a}{m+a+b+l} &=& \frac{\lambda \cdot a}{a+b} + \frac{m}{m+b} - \frac{\lambda \cdot m}{m+l}
 \end{eqnarray}
 To determine $\lambda$ and $(1-\lambda)$ we derive from $\frac{m+a}{m+a+b+l}$:
 \begin{eqnarray}
@@ -168,9 +183,91 @@ stating that
 \lambda = \frac{a+b}{m+a+b+l}\\
 1-\lambda = \frac{m+l}{m+a+b+l}
 \end{eqnarray}
+
 \subsection{Poisson distribution}
 \paragraph*{Problem 5}
 $\;$ 
+
+Given are $n$ i.i.d. samples from X which is Poisson distributed with the mass probability function for one random variable
+\begin{eqnarray}
+p(x|\lambda) = \frac{\lambda^x}{x!}e^{-\lambda}
+\end{eqnarray}
+
+one can compute the maximum likelihood estimate for $\lambda$:
+
+\begin{eqnarray}
+L(\lambda|x_{1..n}) &=& p(x_{1..n}|\lambda)) = \prod_{i=1}^{n} \frac{\lambda^{x_i}}{x_i!}e^{-\lambda}\\
+l(\lambda|x_{1..n}) &=& ln(L(\lambda|x_{1..n}))\\
+&=& ln\left(\prod_{i=1}^{n} \frac{\lambda^{x_i}}{x_i!}e^{-\lambda}\right)\\
+&=& \sum_{i = 1}^{n} x_i ln \lambda - ln x_i - \lambda\\
+\frac{\delta l(\lambda|x_{1..n})}{\delta \lambda} &=& \sum_{i = 1}^{n} \frac{x_i}{\lambda} - 1 \overset{!}{=} 0\\
+\Leftrightarrow \sum_{i = 1}^{n} \frac{x_i}{\lambda} &=& n\\
+\Leftrightarrow \hat{\lambda} &=& \frac{\sum_{i = 1}^{n} x_i}{n}
+\end{eqnarray}
+
+To ensure that this is a maximum we compute the second derivative and insert $\hat{\lambda}$ and see if it is smaller than 0.
+\begin{eqnarray}
+\frac{\delta^2 l(\lambda|x_{1..n})}{\delta \lambda^2} &=& \sum_{i = 1}^{n} -\frac{x_i}{\lambda^2}\\
+\Rightarrow \frac{\delta^2 l(\hat{\lambda}|x_{1..n})}{\delta \lambda^2} &=& \sum_{i = 1}^{n} -\frac{x_i}{\left(\frac{\sum_{i = 1}^{n} x_i}{n}\right)^2}
+\end{eqnarray}
+Since both the numerator and the denominator are greater 0, the whole last term is smaller than 0. Therefore $\hat{\lambda}$ is a maximum and therefore the MLE.
+
+Additionally it was to shown that this MLE is unbiased. This holds if $E[X] = E[\hat{\lambda}]$.
+\begin{eqnarray}
+E[\hat{\lambda}] &=& E\left[\frac{1}{n}\sum_{i = 1}^{n} x_i\right]\\
+&=& \frac{1}{n} E\left[\sum_{i = 1}^{n} x_i\right]\\
+&=& \frac{1}{n} \sum_{i = 1}^{n}E\left[x_i\right]
+\label{Exi}
+\end{eqnarray}
+Now we have to calculate $E[X]$. This can be included in the equation above.
+\begin{eqnarray}
+E[X] &=& \sum_{k=0}^{\infty} k\frac{\lambda^k}{k!} e^{-\lambda}\\
+&=& \sum_{k=1}^{\infty} k\frac{\lambda^k}{k!} e^{-\lambda}\\
+&=& \sum_{k=1}^{\infty} \frac{\lambda^k}{(k-1)!} e^{-\lambda}\\
+&=& \sum_{k=0}^{\infty} \frac{\lambda^{k+1}}{k!} e^{-\lambda}\\
+&=& e^{-\lambda} \lambda \sum_{k=0}^{\infty} \frac{\lambda^{k}}{k!}
+\end{eqnarray}
+With $e^\lambda = \sum_{k=0}^{\infty} \frac{\lambda^{k}}{k!}$
+\begin{eqnarray}
+E[X] &=& e^{-\lambda} \lambda e^{\lambda}\\
+&=& e^{\lambda-\lambda} \lambda\\
+&=& \lambda
+\end{eqnarray}
+With that knowledge we can continue with \ref{Exi}:
+\begin{eqnarray}
+E[\hat{\lambda}] &=& \frac{1}{n} \sum_{i = 1}^{n}E\left[x_i\right]\\
+&=& \frac{1}{n} \sum_{i = 1}^{n}\lambda\\
+&=& \frac{1}{n} n\lambda\\
+&=& \lambda\\
+&=& E[X]
+\end{eqnarray}
+
+This shows that the MLE for $\lambda$ is unbiased.
+
+Next, the posteriori distribution over $\lambda$ should be computed assuming a $Gamma(\alpha, \beta)$ prior for it using Bayes and reverse engineering:
+\begin{eqnarray}
+p(\lambda) = \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha-1} e^{-\beta \lambda}\\
+p(\lambda|x_{1..n}) &=& \frac{p(x_{1..n}|\lambda)p(\lambda)}{p(x_{1..n})}\\
+&=& \frac{p(x_{1..n}|\lambda)p(\lambda)}{\int_0^\infty p(x_{1..n}|\lambda)p(\lambda)}\\
+&=& \frac{\left(\prod_{i=1}^{n} \frac{\lambda^{x_i}}{x_i!}e^{-\lambda}\right)\frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha-1} e^{-\beta \lambda}}{\int_0^\infty \left(\prod_{i=1}^{n} \frac{\lambda^{x_i}}{x_i!}e^{-\lambda}\right)\frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha-1} e^{-\beta \lambda}}\\
+&=& \frac{\left(\prod_{i=1}^{n} \frac{\lambda^{x_i}}{x_i!}e^{-\lambda}\right)\frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha-1} e^{-\beta \lambda}}{\frac{\beta^\alpha}{\Gamma(\alpha)} \prod_{i=1}^{n} \frac{1}{x_i!} \int_0^\infty \left(\prod_{i=1}^{n} \lambda^{x_i}e^{-\lambda}\right) \lambda^{\alpha-1} e^{-\beta \lambda}}\\
+&=& \frac{\left(\prod_{i=1}^{n} \lambda^{x_i}e^{-\lambda}\right) \lambda^{\alpha-1} e^{-\beta \lambda}}{ \int_0^\infty \left(\prod_{i=1}^{n} \lambda^{x_i}e^{-\lambda}\right) \lambda^{\alpha-1} e^{-\beta \lambda}}\\
+&=& \frac{\lambda^{\sum_{i=1}^n x_i} e^{-\lambda(n+\beta)} \lambda^{\alpha-1}}{ \lambda^{\sum_{i=1}^n x_i} e^{-\lambda(n+\beta)} \lambda^{\alpha-1}}\\
+&=& \frac{\lambda^{\sum_{i=1}^n x_i + \alpha-1} e^{-\lambda(n+\beta)}}{ \lambda^{\sum_{i=1}^n x_i + \alpha-1} e^{-\lambda(n+\beta)}}\\
+&=& \frac{(n+\beta)^{\sum_{i=1}^n x_i + \alpha}}{\Gamma(\sum_{i=1}^n x_i + \alpha)} \lambda^{\sum_{i=1}^n x_i + \alpha-1} e^{-\lambda(n+\beta)}\\
+&=& Gamma(\sum_{i=1}^n x_i + \alpha, n+\beta)
+\end{eqnarray}
+This means that the posterior distribution of $\lambda$ is again a Gamma distribution.
+
+At least the MAP for $\lambda$ should be computed:
+\begin{eqnarray}
+ln(p(\lambda|x_{1..n})) &=& ln\left(\frac{(n+\beta)^{\sum_{i=1}^n x_i + \alpha}}{\Gamma(\sum_{i=1}^n x_i + \alpha)}\right) - \lambda(n+\beta) + \left(\sum_{i=1}^n x_i + \alpha-1\right) ln(\lambda)\\
+\frac{\delta ln(p(\lambda|x_{1..n}))}{\delta \lambda} &=& -n-\beta + \frac{\sum_{i=1}^n x_i + \alpha-1}{\lambda} \overset{!}{=} 0
+\end{eqnarray}
+\begin{eqnarray}
+\Leftrightarrow \lambda(-n-\beta) + \sum_{i=1}^n x_i + \alpha-1 &=& 0\\
+\Leftrightarrow \lambda_{MAP} &=& \frac{\sum_{i=1}^n x_i + \alpha-1}{n+\beta}
+\end{eqnarray}
 
 
 \end{document}
