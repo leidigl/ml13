@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{ml1_homework_template}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
 % please submit the corresponding pdf by email to
 % homework@class,brml.org, and write "homework sheet xx" in the 
@@ -8,17 +10,17 @@
 
 % Please update the following line, only change XX to the homework
 % sheet number
-\title{homework sheet XX}
+\title{homework sheet 05}
 
 
 \author{
-\name{Jade Shade}\\
-\imat{1627482920}\\
-\email{jade@shade.com}
+\name{Andre Seitz}\\
+\imat{03622870}\\
+\email{andre.seitz@mytum.de}
 \And
-\name{Pete Sheet} \\
-\imat{4872903849}\\
-\email{pete@sheet.com}
+\name{Linda Leidig} \\
+\imat{03608416}\\
+\email{linda.leidig@tum.de}
 }
 
 % The \author macro works with any number of authors. There are two commands
@@ -30,17 +32,198 @@
 % line, try using \AND instead of \And before the third author name.
 
 
+\renewcommand{\Vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Mtx}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+
 
 \begin{document}
 \maketitle
 
-\section{Assignment: multiply two matrices}
-The solution to assignment 1 is simple.
+\section{Assignment: Probability Theory}
+\paragraph*{Problem 1}
+$\;$ 
 
-\section{Assignment: invert a singular matrix}
-The solution to assignment 1 is unknown to us.
+Let $X$ have a continuous cdf $F_X(x)$. Define the
+random variable $Y$ as $Y = F_X(X)$. Assuming that
+$F_X(x)$ is strictly increasing, how is $Y$ distributed?
+Show your work.
 
-\section{Assignment: a shorter solution to Fermat's last theorem }
-Assignment 3 is solved, but takes too much space to write down here.
+\paragraph*{Solution:}
+\begin{eqnarray}
+P(Y \leq y) = P(F_X(X) \leq y) = P(X \leq F^{-1}_X(y)) = F_X(F_X^{-1}(y)) = y
+\end{eqnarray}
+
+The area under a curve (integral) between 0 and some point $y \in [0,1]$ can only be the same as $y$ if it is a constant curve at 1. Therefore, $Y$ is uniformly distributed with $U(0,1)$.
+
+\paragraph*{Problem 2}
+$\;$ 
+
+Show that the sum of two independent Gaussian random variables ($\Vec{X_1}$ and $\Vec{X_2}$) is Gaussian. Some of the properties of Gaussians mentioned in the lecture can help.
+
+\paragraph*{Solution:}
+
+
+
+
+\paragraph*{Problem 3}
+$\;$ 
+
+Let $Z = (X, Y)$ be a bivariate normal distributed random variable. Furthermore, let $X \sim \mathcal{N}(\mu_X, \sigma^2_X)$ and $Y \sim \mathcal{N}(\mu_Y, \sigma^2_Y)$. Assume that $\rho(X, Y) = 0$. Show that in this case $X$ and $Y$ are independent.
+
+\paragraph*{Solution:}
+
+
+
+
+\section{Assignment: Weighted Linear Regression}
+\paragraph*{Problem 4}
+$\;$ 
+
+Consider a linear regression problem in which we want to ``weight'' 
+different training examples differently. Specifically, suppose we want to minimize
+\[ 
+E(\Vec{w}) = \frac{1}{2}\sum^N \theta_n\left(z_n- \Vec{w}^T\Vec{\phi}(\Vec{x}_n)\right)^2 
+\]
+
+We already worked out what happens for the case where all the
+weights $\theta_n$ are the same. In this problem, we will generalize some 
+of those ideas to the weighted setting, and also implement the locally 
+weighted linear regression algorithm.
+
+\begin{enumerate}
+\item Show that $E(\Vec{w})$ can also be written
+\begin{equation} \label{Emat}
+E(\Vec{w}) = (\Vec{z}-\Mtx{\Phi}\Vec{w})^{T}\Mtx{\Theta}(\Vec{z}-\Mtx{\Phi}\Vec{w}) 
+\end{equation}
+for an appropriate diagonal matrix $\Mtx{\Theta}$, and where $\Mtx{\Phi}$ and 
+$\Vec{z}$ are as defined in class. State clearly what $\Mtx{\Theta}$ is.
+
+\item Now let all the $\theta_n$ equal $1$. By differentiating Eq.\ \ref{Emat} 
+with respect to \Vec{w}, derive the normal equations for the least squares problem, 
+as given in class. 
+
+\item Generalize the normal equations to the case of arbitrary $\theta_n$.
+
+\item Suppose we have a training set ${(\Vec{x}_n, z_n);\ n = 1, \dots ,N}$ 
+of $N$ independent examples, but in which the $z_n$ were observed with differing 
+variances. Specifically, suppose that
+\[
+p(z_n|\Vec{x}_n,\Vec{w}) = \mathcal{N}(z_n|\Vec{w}^{T}\Vec{\phi}(\Vec{x}_n),\sigma_n^2)
+\]
+where the $\sigma_n$ are fixed, known, constants. Show that finding the maximum 
+likelihood estimate of $\Vec{w}$ reduces to solving a weighted linear regression problem. 
+State clearly what the $\theta_n$ are in terms of the $\sigma_n$.
+
+\item With \emph{ordinary} linear regression it may be a good idea to \emph{rescale} the
+\emph{columns} of the design matrix -- in particular when using nonlinear basis function
+expansions (e.g. like polynomial expansion). Using the normal equations, prove that rescaling
+the design matrix does not change the predicted values for some test dataset.
+\end{enumerate}
+
+\paragraph*{Solution:}
+
+
+
+
+
+\section{Assignment: Basisfunctions }
+\paragraph*{Problem 5}
+$\;$ 
+
+Show that the $\tanh$ function and the logistic sigmoid function are related
+by 
+\[
+\tanh(x) = 2\sigma(2x) - 1
+\]
+Thus, show that a general linear combination of logistic sigmoid functions
+of the form
+\[
+y(x, \Vec{w}) = w_0 + \sum_{j=1}^{M} w_j \sigma\left(\frac{x - \mu_j}{s}\right)
+\]
+is equivalent to a linear combination of $\tanh$ functions of the form
+\[
+y(x, \Vec{u}) = u_0 + \sum_{j=1}^{M} u_j \tanh\left(\frac{x - \mu_j}{2s}\right)
+\]
+and find expressions to relate the new parameters $\{u_0, \dots, u_M\}$ to 
+the original parameters $\{w_0, \dots, w_M \}$.
+
+\paragraph*{Solution:}
+
+
+
+
+\section{Assignment: Ridge regression }
+\paragraph*{Problem 6}
+$\;$ 
+
+Show that the following holds:
+The ridge regression estimates can be obtained by ordinary
+least squares regression on an augmented dataset: Augment the
+design matrix $\Mtx{\Phi}$ with $p$ additional rows  $\sqrt{\lambda}\Mtx{I}$
+and augment $\Vec{z}$ with $p$ zeros.
+
+\paragraph*{Solution:}
+
+
+
+
+\paragraph*{Problem 7}
+$\;$ 
+
+Using singular value decomposition of the design matrix $\Mtx{\Phi} =
+\Mtx{U}\Mtx{D}\Mtx{V}^T$ show that the output on the training set fitted with
+the ridge regression solution $\hat{\Vec{w}}^{ridge}$ can be written as 
+\[
+\sum_j \left( \frac{d_j^2}{d_j^2 + \lambda} \Vec{u}_j \Vec{u}_j^T \right) \Vec{z} 
+\]
+where $\Vec{u}_j$ are the columns of $\Mtx{U}$, $d_j$ the
+elements of $\Mtx{D}$ and $\lambda$ the cost factor of the $\ell2$
+regularization. What is the interpretation of this formula?
+
+\paragraph*{Solution:}
+
+
+
+
+\section{Assignment: Multi-output linear regression }
+\paragraph*{Problem 8}
+$\;$ 
+
+In class, we only considered functions of the form $f: \R^n \rightarrow \R$. What
+about the general case of $f: \R^n \rightarrow \R^m$? For linear regression with
+multiple outputs, write down the loglikelihood formulation and derive the MLE of
+the parameters.
+
+\paragraph*{Solution:}
+
+
+
+
+
+\section{Assignment: Bayesian Linear Regression }
+\paragraph*{Problem 9}
+$\;$ 
+
+$\star$ 
+We have seen that, as the size of a data set increases, the uncertainty
+associated with the posterior distribution over model parameters decreases (see 
+tower equalities). Prove the following matrix identity
+\[
+(\Mtx{M} + \Vec{v}\Vec{v}^T)^{-1} = \Mtx{M}^{-1} - 
+\frac{(\Mtx{M}^{-1}\Vec{v})(\Vec{v}^T\Mtx{M}^{-1})}{1 + \Vec{v}^T\Mtx{M}^{-1}\Vec{v}}
+\]
+and, using it, show that the uncertainty $\sigma_N^2(\Vec{x})$ associated
+with the bayesian linear regression function given by eq. (26) on the slides satisfies
+\begin{equation}
+\sigma_{N+1}^2(\Vec{x}) \leq \sigma_N^2(\Vec{x})
+\label{eq:varred}
+\end{equation}
+
+\paragraph*{Solution:}
+
+
+
+
 
 \end{document}
