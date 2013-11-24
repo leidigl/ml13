@@ -138,9 +138,9 @@ for an appropriate diagonal matrix $\Mtx{\Theta}$, and where $\Mtx{\Phi}$ and
 $\Vec{z}$ are as defined in class. State clearly what $\Mtx{\Theta}$ is.
 
 \paragraph*{Solution:}
-We start with converting $E(w) = (z - \phi w)^T \theta (z - \phi w)$ and will get $E(w) = \frac{1}{2} \sum_{n=1}^{N} \theta_n (z_n - w^T \phi(x_n))^2$:
+We start with converting $E(w) = (z - \Phi w)^T \Theta (z - \Phi w)$ and will get $E(w) = \frac{1}{2} \sum_{n=1}^{N} \theta_n (z_n - w^T \phi(x_n))^2$:
 \begin{eqnarray}
-E(w) &=& (z-\phi w)^T \theta (z-\phi w) \\
+E(w) &=& (z-\Phi w)^T \Theta (z-\Phi w) \\
 %
 &=& \left[\left(  
 \begin{array}{c} 
@@ -152,27 +152,27 @@ z_1 \\
 \phi_{1,1}w_1+\cdots +\phi_{M,1}w_M \\
 \vdots \\
 \phi_{1,N}w_1+\cdots + \phi_{M,N}w_M
-\end{array}\right)\right]^T \theta (z-\phi w) \\
+\end{array}\right)\right]^T \Theta (z-\Phi w) \\
 %
 &=& \left[\left( 
 \begin{array}{c} 
 z_1 - (\phi_{1,1}w_1+\cdots +\phi_{M,1}w_M) \\
 \vdots \\
 z_N - (\phi_{1,N}w_1+\cdots + \phi_{M,N}w_M)
-\end{array}\right)\right]^T \theta (z-\phi w) \\
+\end{array}\right)\right]^T \Theta (z-\Phi w) \\
 %
 &=& \left[\left( 
 \begin{array}{c} 
 \theta_{1,1}(z_1 - (\phi_{1,1}w_1+\cdots +\phi_{M,1}w_M)) \\
 \vdots \\
 \theta_{N,N}(z_N - (\phi_{1,N}w_1+\cdots + \phi_{M,N}w_M))
-\end{array}\right)\right]^T (z-\phi w) \\
+\end{array}\right)\right]^T (z-\Phi w) \\
 %
 &=& \theta_{1,1} (z_1 - (\phi_{1,1} w_1 + \cdots + \phi_{M,1} w_M))^2 + \cdots + \theta_{N,N} (z_n - (\phi_{1,N} w_1 + \cdots + \phi_{M,N} w_M))^2 \\
 %
-&=& \sum_{n=1}^N \theta_{n,n} (z_n - \sum_{m=1}^M \phi_n,m w_m)^2
+&=& \sum_{n=1}^N \theta_{n,n} (z_n - \sum_{m=1}^M \phi_{n,m} w_m)^2
 \end{eqnarray}
-Now we define $\theta_n$ as the diagonal entries of the diagonal matrix $\theta$, where $\theta_{n,n} = \frac{1}{2} \theta_n$ and proceed transforming the matrix.
+Now we define $\theta_n$ as the diagonal entries of the diagonal matrix $\Theta$, where $\theta_{n,n} = \frac{1}{2} \theta_n$ and proceed transforming the matrix.
 \begin{eqnarray}
 \sum_{n=1}^N \theta_{n,n} (z_n - \sum_{m=1}^M \phi_n,m w_m)^2 &=&\\
 %
