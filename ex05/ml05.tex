@@ -62,9 +62,34 @@ $\;$
 Show that the sum of two independent Gaussian random variables ($\Vec{X_1}$ and $\Vec{X_2}$) is Gaussian. Some of the properties of Gaussians mentioned in the lecture can help.
 
 \paragraph*{Solution:}
-
-
-
+Given
+\begin{eqnarray}
+\Vec{X_1} = \mathcal{N}(x | \mu_1, \Sigma_1) \\
+\Vec{X_2} = \mathcal{N}(x | \mu_2, \Sigma_2) \\
+\end{eqnarray}
+we look for 
+\begin{eqnarray}
+\Vec{Z} = \Vec{X_1} + \Vec{X_2} \overset{!}{=} \mathcal{N}(x | \mu_Z, \Sigma_Z)
+\end{eqnarray}
+From the lecture we know 
+\begin{eqnarray}
+\Vec{Y} = \Mtx{A}\Vec{X} + \Mtx{B}
+\end{eqnarray}
+with $\Mtx{X}$ being a Gaussian, $\Vec{Y}$ being one as well.\\
+We chose $\Vec{X}$ as $(\Vec{X_1},\Vec{X_2})^T$. As known from the lectures $\Vec{X}$ is also a (multivariate) Gaussian with $\mu_Y = (\mu_1,\mu_2)^T$ and $\Sigma_Y = \left( \begin{array}{c c} \Sigma_1 & 0 \\ 0 & \Sigma_2 \end{array}\right)$.\\
+$\Vec{Y}$ can therefore be written as 
+\begin{eqnarray}
+\Vec{Y} = \Mtx{A} (\Vec{X_1},\Vec{X_2})^T + \Mtx{B}
+\end{eqnarray}
+Choosing $\Mtx{A} = (1,1)$ and $\Mtx{B} = 0$ leads to
+\begin{eqnarray}
+\Vec{Y} = (1,1) (\Vec{X_1},\Vec{X_2})^T = \Vec{X_1} + \Vec{X_2} = \Vec{Z}
+\end{eqnarray}
+Therefore $\Vec{Z}$ has to be a Gaussian with mean and variance:
+\begin{eqnarray}
+\mu_Z = \mu_1+\mu_2 \\
+\Sigma_Z = \Sigma_1 + \Sigma_2
+\end{eqnarray}
 
 \paragraph*{Problem 3}
 $\;$ 
