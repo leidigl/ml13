@@ -195,7 +195,7 @@ as given in class.
 
 \paragraph*{Solution:}
 \begin{eqnarray}
-\nabla_w E(\Vec{w}) &=& -\Mtx{\Phi}^T \frac{1}{2} (\Mtx{\Theta} + \Mtx{\Theta}^T) (\Vec{z}-\Mtx{\Phi} \Vec{w}) = -\Mtx{\Phi}^T \Mtx{I} (\Vec{z}-\Mtx{\Phi} \Vec{w})\\
+\nabla_w E(\Vec{w}) &=& -\Mtx{\Phi}^T (\Mtx{\Theta} + \Mtx{\Theta}^T) (\Vec{z}-\Mtx{\Phi} \Vec{w}) = -\Mtx{\Phi}^T \Mtx{I} (\Vec{z}-\Mtx{\Phi} \Vec{w})\\
 &=& -\Mtx{\Phi}^T (\Vec{z}-\Mtx{\Phi} \Vec{w}) = \Mtx{\Phi}^T \Mtx{\Phi} \Vec{w} - \Mtx{\Phi}^T \Vec{z}
 \end{eqnarray}
 
