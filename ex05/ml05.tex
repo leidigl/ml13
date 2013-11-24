@@ -72,8 +72,46 @@ $\;$
 Let $Z = (X, Y)$ be a bivariate normal distributed random variable. Furthermore, let $X \sim \mathcal{N}(\mu_X, \sigma^2_X)$ and $Y \sim \mathcal{N}(\mu_Y, \sigma^2_Y)$. Assume that $\rho(X, Y) = 0$. Show that in this case $X$ and $Y$ are independent.
 
 \paragraph*{Solution:}
+Two random variables $X$ and $Y$ are independent if the following holds:
+\begin{eqnarray}
+f(x,y) = f(x)f(y)
+\label{inequality}
+\end{eqnarray}
+with $f(x)$ and $f(y)$ being the density function of $X$ and $Y$, respectively. $f(x,y)$ is the joint density function.
 
+Since $Z$ is a bivariate Gaussian composed of $X$ and $Y$, $z = \left( \begin{array}{c} x\\y\end{array} \right)$ and $\mu_Z = \left(\begin{array}{c}\mu_X\\\mu_Y\end{array}\right)$. The correlation coefficient of X and Y is zero. Therefore, the covariance of X and Y is zero, which leads to the following covariance matrix for $Z$:
+\begin{eqnarray}
+\Sigma_Z = \left( \begin{array}{cc}
+\sigma_X^2 & 0\\
+0 & \sigma_Y^2
+\end{array} \right)
+\end{eqnarray}
 
+We can use this to show equation \ref{inequality}:
+
+\begin{eqnarray}
+f(z) &=& \frac{1}{\sqrt{|2\pi \Mtx{\Sigma_Z}}|} exp\left(-\frac{1}{2} ((\Vec{z}-\Vec{\mu_Z})^T \Mtx{\Sigma_Z} (\Vec{z}-\Vec{\mu_Z})\right)\\
+f(x,y) &=& \frac{1}{\sqrt{\left|2\pi \left( \begin{array}{cc}
+\sigma_X^2 & 0\\
+0 & \sigma_Y^2
+\end{array} \right) \right| }}
+ exp\left(-\frac{1}{2} \left( \left( \begin{array}{c} x-\mu_X \\y-\mu_Y \end{array} \right)^T 
+ \left( \begin{array}{cc}
+\sigma_X^2 & 0\\
+0 & \sigma_Y^2
+\end{array} \right)
+ \left( \begin{array}{c} x-\mu_X \\y-\mu_Y \end{array} \right) \right) \right)\\
+ &=& \frac{1}{\sqrt{2^2\pi^2 \sigma_X^2 \sigma_Y^2}}
+ exp\left(-\frac{1}{2} \left( \left( \begin{array}{c} \frac{x-\mu_X}{\sigma_X^2} \\ \frac{y-\mu_Y}{\sigma_Y^2} \end{array} \right)^T 
+ \left( \begin{array}{c} x-\mu_X \\y-\mu_Y \end{array} \right) \right) \right)\\
+ &=& \frac{1}{2\pi \sigma_X \sigma_Y}
+ exp\left(-\frac{1}{2} \left( \frac{(x-\mu_X)^2}{\sigma_X^2} + \frac{(y-\mu_Y)^2}{\sigma_Y^2} \right) \right)\\
+ &=& \frac{1}{2\pi \sigma_X \sigma_Y}
+ exp\left(-\frac{1}{2} \frac{(x-\mu_X)^2}{\sigma_X^2}\right) \cdot exp\left(-\frac{1}{2} \frac{(y-\mu_Y)^2}{\sigma_Y^2} \right)\\
+ &=& \frac{1}{\sqrt{2\pi} \sigma_X}
+ exp\left(-\frac{1}{2} \frac{(x-\mu_X)^2}{\sigma_X^2}\right) \cdot \frac{1}{\sqrt{2\pi} \sigma_Y} exp\left(-\frac{1}{2} \frac{(y-\mu_Y)^2}{\sigma_Y^2} \right)\\
+ &=& f(x)f(y)
+\end{eqnarray}
 
 
 \section{Assignment: Weighted Linear Regression}
@@ -142,7 +180,7 @@ Now we define $\theta_n$ as the diagonal entries of the diagonal matrix $\theta$
 %
 \frac{1}{2} \sum_{n=1}^N \theta_{n} (z_n - w^T \phi (x_n))^2 &=& E(w)
 \end{eqnarray}
-And just to ensure a clear statement: The matrix $\Mtx{\theta} $was chosen as $\Mtx{\theta} = \left( 
+And just to ensure a clear statement: The matrix $\Mtx{\Theta} $ was chosen as $\Mtx{\Theta} = \left( 
 \begin{array}{c c c c}  
 \frac{1}{2}\theta_1 	& 0 					& \cdots 					& 0 \\
 0 								& \ddots			& \ddots 					& \vdots \\
@@ -150,11 +188,29 @@ And just to ensure a clear statement: The matrix $\Mtx{\theta} $was chosen as $\
 0								& \cdots			&	0							&\frac{1}{2}\theta_n
 \end{array} \right)$  
 
+
 \item Now let all the $\theta_n$ equal $1$. By differentiating Eq.\ \ref{Emat} 
 with respect to \Vec{w}, derive the normal equations for the least squares problem, 
 as given in class. 
 
+\paragraph*{Solution:}
+\begin{eqnarray}
+\nabla_w E(\Vec{w}) &=& -\Mtx{\Phi}^T \frac{1}{2} (\Mtx{\Theta} + \Mtx{\Theta}^T) (\Vec{z}-\Mtx{\Phi} \Vec{w}) = -\Mtx{\Phi}^T \Mtx{I} (\Vec{z}-\Mtx{\Phi} \Vec{w})\\
+&=& -\Mtx{\Phi}^T (\Vec{z}-\Mtx{\Phi} \Vec{w}) = \Mtx{\Phi}^T \Mtx{\Phi} \Vec{w} - \Mtx{\Phi}^T \Vec{z}
+\end{eqnarray}
+
+Setting $\nabla_w E(\Vec{w}) \overset{!}{=} 0$ results in:
+\begin{eqnarray}
+\Mtx{\Phi}^T \Mtx{\Phi} \Vec{w} - \Mtx{\Phi}^T \Vec{z} &=& 0\\
+\Mtx{\Phi}^T \Mtx{\Phi} \Vec{w} &=& \Mtx{\Phi}^T \Vec{z}\\
+\Vec{w}_{ML} &=& (\Mtx{\Phi}^T \Mtx{\Phi})^{-1}\Mtx{\Phi}^T \Vec{z}
+\end{eqnarray}
+
+
 \item Generalize the normal equations to the case of arbitrary $\theta_n$.
+
+\paragraph*{Solution:}
+
 
 \item Suppose we have a training set ${(\Vec{x}_n, z_n);\ n = 1, \dots ,N}$ 
 of $N$ independent examples, but in which the $z_n$ were observed with differing 
