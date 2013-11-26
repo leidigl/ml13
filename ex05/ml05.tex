@@ -235,6 +235,17 @@ Setting $\nabla_w E(\Vec{w}) \overset{!}{=} 0$ results in:
 \item Generalize the normal equations to the case of arbitrary $\theta_n$.
 
 \paragraph*{Solution:}
+\begin{eqnarray}
+\nabla_w E(\Vec{w}) &=& -\Mtx{\Phi}^T (\Mtx{\Theta} + \Mtx{\Theta}^T) (\Vec{z}-\Mtx{\Phi} \Vec{w}) = - \Mtx{\Phi}^T 2\Mtx{\Theta} (\Vec{z}-\Mtx{\Phi} \Vec{w})\\
+&=& 2 \Mtx{\Phi}^T \Mtx{\Theta} \Mtx{\Phi} \Vec{w} - 2 \Mtx{\Phi}^T \Mtx{\Theta} \Vec{z}
+\end{eqnarray}
+
+Setting $\nabla_w E(\Vec{w}) \overset{!}{=} 0$ results in:
+\begin{eqnarray}
+2 \Mtx{\Phi}^T \Mtx{\Theta} \Mtx{\Phi} \Vec{w} - 2 \Mtx{\Phi}^T \Mtx{\Theta} \Vec{z} &=& 0\\
+\Mtx{\Phi}^T \Mtx{\Theta} \Mtx{\Phi} \Vec{w} &=& \Mtx{\Phi}^T \Mtx{\Theta} \Vec{z}\\
+\Vec{w}_{ML} &=& (\Mtx{\Phi}^T \Mtx{\Theta} \Mtx{\Phi})^{-1} \Mtx{\Phi}^T \Mtx{\Theta} \Vec{z}
+\end{eqnarray}
 
 
 \item Suppose we have a training set ${(\Vec{x}_n, z_n);\ n = 1, \dots ,N}$ 
@@ -246,6 +257,28 @@ p(z_n|\Vec{x}_n,\Vec{w}) = \mathcal{N}(z_n|\Vec{w}^{T}\Vec{\phi}(\Vec{x}_n),\sig
 where the $\sigma_n$ are fixed, known, constants. Show that finding the maximum 
 likelihood estimate of $\Vec{w}$ reduces to solving a weighted linear regression problem. 
 State clearly what the $\theta_n$ are in terms of the $\sigma_n$.
+
+\paragraph*{Solution:}
+\begin{eqnarray}
+&&ln (\mathcal{N}(z_n|\Vec{w}^{T}\Vec{\phi}(\Vec{x}_n),\sigma_n^2))\\
+ &=& ln \prod^{N}_{n=1} p(z_n|\Vec{x}_n,\Vec{w}) \\
+&=& ln \prod^{N}_{n=1} \frac{1}{\sqrt{2\pi \sigma_n^2}} exp\left(-\frac{1}{2} \frac{(z_n - \Vec{w}^{T}\Vec{\phi}(\Vec{x}_n))^2}{\sigma_n^2}\right)\\
+&=& -\frac{N}{2} ln(2\pi)-\frac{1}{2} \sum^{N}_{n=1} ln(\sigma_n^2) -\frac{1}{2} \sum^{N}_{n=1} \frac{(z_n - \Vec{w}^{T}\Vec{\phi}(\Vec{x}_n))^2}{\sigma_n^2}\\
+&=& -\frac{N}{2} ln(2\pi)-\frac{1}{2} \sum^{N}_{n=1} ln(\sigma_n^2) -\frac{1}{2} \sum^{N}_{n=1} \frac{1}{\sigma_n^2}(z_n - \Vec{w}^{T}\Vec{\phi}(\Vec{x}_n))^2
+\end{eqnarray}
+
+Now we choose $\theta_n = \frac{1}{\sigma_n^2}$. Therefore, we get:
+\begin{eqnarray}
+-\frac{N}{2} ln(2\pi)-\frac{1}{2} \sum^{N}_{n=1} ln(\sigma_n^2) -\frac{1}{2} \sum^{N}_{n=1} \theta_n (z_n - \Vec{w}^{T}\Vec{\phi}(\Vec{x}_n))^2
+\end{eqnarray}
+
+To minimize this term we derive w.r.t. $\Vec{w}$ and calculate a minimum solution for $\Vec{w}$ by setting the derivative equals to zero.
+
+\begin{eqnarray}
+\nabla_{\Vec{w}} ln(p(z_n|\Vec{x}_n,\Vec{w})) \propto \sum_{n=1}^N \theta_n (z_n - \Vec{w}^T\phi(\Vec{x_n}))\phi(\Vec{x_n}) \overset{!}{=} 0
+\end{eqnarray}
+
+Therefore, we showed that the finding of a MLE for a linear regression with different variances reduces to simply solving a weighted linear regression problem.
 
 \item With \emph{ordinary} linear regression it may be a good idea to \emph{rescale} the
 \emph{columns} of the design matrix -- in particular when using nonlinear basis function
