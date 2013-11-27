@@ -342,7 +342,27 @@ and augment $\Vec{z}$ with $p$ zeros.
 
 \paragraph*{Solution:}
 
+To show:
+\begin{eqnarray}
+\frac{1}{2}\sum_{n=1}^{N+p} \left(z_n- \Vec{w}^T\Vec{\phi}(\Vec{x}_n)\right)^2 \overset{!}{=} \frac{1}{2}\sum^{N} \left(z_n- \Vec{w}^T\Vec{\phi}(\Vec{x}_n)\right)^2 + \frac{1}{2}\sum^{M} w_j^2
+\end{eqnarray}
 
+This is done by splitting the augmented $\Mtx{\Phi}$ and $\Vec{z}$ into an upper and a lower part, while the upper part consists of $N$ and the lower part of $p$ rows:
+
+\begin{eqnarray}
+&&\frac{1}{2}\sum_{n=1}^{N+p} \left(z_n- \Vec{w}^T\Vec{\phi}(\Vec{x}_n)\right)^2\\
+&=& \frac{1}{2}\sum_{n=1}^{N+p} \left(z_n- \sum_{i=0}^{M-1} w_i \phi_i(x_n)\right)^2\\
+&=& \frac{1}{2}\sum_{n=1}^{N} \left(z_n- \sum_{i=0}^{M-1} w_i \phi_i(x_n)\right)^2 + \frac{1}{2}\sum_{n=N+1}^{N+p} \left(z_n- \sum_{i=0}^{M-1} w_i \phi_i(x_n)\right)^2\\
+&=& \frac{1}{2}\sum_{n=1}^{N} \left(z_n- \sum_{i=0}^{M-1} w_i \phi_i(x_n)\right)^2 + \frac{1}{2}\sum_{j=1}^{p} \left(0- \sum_{i=0}^{M-1} w_i \sqrt{\lambda} I_{ji} \right)^2
+\end{eqnarray}
+
+Since $I$ is a quadratic matrix and the number of columns is equals to the number of columns of $\Mtx{\Phi}$ and therefore $M$, $I$ has size $M\times M$.
+
+\begin{eqnarray}
+&=& \frac{1}{2}\sum_{n=1}^{N} \left(z_n- \sum_{i=0}^{M-1} w_i \phi_i(x_n)\right)^2 + \frac{1}{2}\sum_{j=0}^{M-1} \left(\sum_{i=0}^{M-1} w_i \sqrt{\lambda} I_{ji} \right)^2\\
+&=& \frac{1}{2}\sum_{n=1}^{N} \left(z_n- \sum_{i=0}^{M-1} w_i \phi_i(x_n)\right)^2 + \frac{\lambda}{2}\sum_{j=0}^{M-1} \left(w_j \right)^2\\
+&=& \frac{1}{2}\sum^{N} \left(z_n- \Vec{w}^T\Vec{\phi}(\Vec{x}_n)\right)^2 + \frac{1}{2}\sum^{M} w_j^2
+\end{eqnarray}
 
 
 \paragraph*{Problem 7}
