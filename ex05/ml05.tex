@@ -315,8 +315,20 @@ the original parameters $\{w_0, \dots, w_M \}$.
 
 \paragraph*{Solution:}
 
+In order to relate the two functions $y(x,w) and y(x,u)$, we transform $y(x,u)$ as follows:
 
+\begin{eqnarray}
+y(x,u) &=& u_0 + \sum_{j=1}^M u_j tanh(\frac{x-\mu_j}{2s}) \\
+&=& u_0 + \sum_{j=1}^M u_j (2 \sigma(2*\frac{x-\mu_j}{2s}) -1) \\
+&=& u_0 + \sum_{j=1}^M u_j (2 \sigma(\frac{x-\mu_j}{s})-1) \\
+&=& u_0  - \sum_{j=1}^M u_j + \sum_{j=1}^M u_j 2 \sigma(\frac{x-\mu_j}{s}) \\
+\end{eqnarray}
 
+Therefore, the two equations can be set equal by assuming 
+\begin{eqnarray}
+w_0 = u_0 - \sum_{j=1}^M u_j \\
+w_j = 2 u_j \forall_{j>0}
+\end{eqnarray}
 
 \section{Assignment: Ridge regression }
 \paragraph*{Problem 6}
