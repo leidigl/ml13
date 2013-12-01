@@ -1,0 +1,228 @@
+\documentclass{article}
+\usepackage{ml1_homework_template}
+\usepackage{ml1_homework_template}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% please submit the corresponding pdf by email to
+% homework@class,brml.org, and write "homework sheet xx" in the 
+% title.  No more, no less!  (Instead of xx, however,
+% put the decimal number of the homework sheet.)
+
+% Please update the following line, only change XX to the homework
+% sheet number
+\title{homework sheet 06}
+
+
+\author{
+\name{Andre Seitz}\\
+\imat{03622870}\\
+\email{andre.seitz@mytum.de}
+\And
+\name{Linda Leidig} \\
+\imat{03608416}\\
+\email{linda.leidig@tum.de}
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+
+\renewcommand{\Vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Mtx}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+
+\begin{document}
+\maketitle
+
+\section{Assignment: Linear separability}
+\paragraph*{Problem 1}
+$\;$ 
+
+Given:
+\begin{itemize}
+\item Set of data points $\{\Vec{x}_n\}$ with the convex hull $\Vec{x} = \sum_n \alpha^{(x)}_n \Vec{x}_n$
+\item Set of data points $\{\Vec{y}_n\}$ with the convex hull $\Vec{y} = \sum_n \alpha^{(y)}_n \Vec{y}_n$
+\item $\{\Vec{x}_n\}$ and $\{\Vec{y}_n\}$ are linearly separable if $\Vec{w}^T \Vec{x}_n + w_0 > 0$  $\forall \Vec{x}_n$ and $\Vec{w}^T \Vec{y}_n + w_0 < 0$ $\forall \Vec{y}_n$
+\end{itemize}
+
+To show: If the convex hulls intersect, $\{\Vec{x}_n\}$ and $\{\Vec{y}_n\}$ cannot be linearly separable, and conversely that if they are linearly separable, their convex hulls do not intersect.
+
+These two statements are equivalent:
+\begin{eqnarray}
+\text{convex hulls intersect} \Rightarrow \neg \text{linearly separable}\\
+\text{linearly separable} \Rightarrow \neg \text{convex hulls intersect}
+\end{eqnarray}
+This shows the following truth table where $\text{convex hulls intersect} = a$ and $\text{linearly separable} = b$:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c||c|c|c|c}
+\textbf{a} & \textbf{b} & \textbf{$\neg a$} & \textbf{$\neg b$} & \textbf{$a \Rightarrow \neg b$} & \textbf{$b \Rightarrow \neg a$}\\
+\hline
+0&0&1&1&1&1\\
+0&1&1&0&1&1\\
+1&0&0&1&1&1\\
+1&1&0&0&0&0
+
+\end{tabular}
+\end{table}
+Therefore, only one statement has to be proved.
+
+Consider the entire convex hulls of the sets for the linear discriminants:
+\begin{eqnarray}
+f(\Vec{x}) = \Vec{w}^T \Vec{x} + w_0 = \Vec{w}^T \sum_n \alpha^{(x)}_n \Vec{x}_n + w_0 = \sum_n \alpha^{(x)}_n \Vec{w}^T \Vec{x}_n + w_0
+\end{eqnarray}
+Since $\sum_n \alpha^{(x)}_n = 1$:
+\begin{eqnarray}
+f(\Vec{x}) = \sum_n \alpha^{(x)}_n (\Vec{w}^T \Vec{x}_n + w_0)
+\end{eqnarray}
+
+The same holds for $\{\Vec{y}_n\}$:
+\begin{eqnarray}
+f(\Vec{y}) = \sum_n \alpha^{(y)}_n (\Vec{w}^T \Vec{y}_n + w_0)
+\end{eqnarray}
+
+The convex hulls intersect $\Rightarrow$ there has to be at least one point $\Vec{z}$ that is included in the convex hulls of $\{\Vec{x}_n\}$ and $\{\Vec{y}_n\}$. Therefore, the following holds for $\Vec{z}$:
+\begin{eqnarray}
+f(\Vec{z}) = \sum_n \alpha^{(x)}_n (\Vec{w}^T \Vec{x}_n + w_0) = \sum_n \alpha^{(y)}_n (\Vec{w}^T \Vec{y}_n + w_0)
+\label{point_z}
+\end{eqnarray}
+
+Due to linear separability the first sum has to be greater than zero and the second smaller than zero. This excludes the possibility of being equal which results in a contradiction!
+
+
+\paragraph*{Problem 2}
+$\;$ 
+
+Given:
+\begin{itemize}
+\item linearly separable dataset $\{(\Vec{x}^n, z^n)\}$
+\item decision boundary of $\Vec{w}$ is $\Vec{w}^T \phi(\Vec{x}) = 0$
+\end{itemize}
+
+From the lecture we know the following about logistic regression:
+\begin{eqnarray}
+p(z=1 |\Vec{x}) &=& \sigma(b+\Vec{x}^T\Vec{w})\\
+p(z=0 |\Vec{x}) &=& 1 - \sigma(b+\Vec{x}^T\Vec{w})
+\end{eqnarray}
+with $\sigma(y) = \frac{1}{1-e^{-y}}$.
+
+For single points $(\Vec{x}^i, z^i)$, which are drawn independently the following likelihood function holds:
+\begin{eqnarray}
+p(\{z^i\} | b, \Vec{w}, {x^i}) &=& \prod_{n=1}^N p(z^n | \Vec{x}^n, b, \Vec{w})\\
+&=& \prod_{n=1}^N p(z=1 | \Vec{x}^n, b, \Vec{w})^{z^n}(1-p(z=1 | \Vec{x}^n, b, \Vec{w}))^{1-z^n}
+\end{eqnarray}
+The corresponding log-likelihood:
+\begin{eqnarray}
+L(\Vec{w}, b) &=& log (p(\{z^i\} | b, \Vec{w}, {x^i}))\\
+&=& \sum_{n = 1}^N z^n log (\sigma(b+\Vec{w}^T\Vec{x}^n)) + (1-z^n) log(1-\sigma(b+\Vec{w}^T\Vec{x}^n))
+\end{eqnarray}
+
+Now computing the derivative of $L$ w.r.t. $\Vec{w}$:
+\begin{eqnarray}
+\nabla_{\Vec{w}}L = \sum_{n=1}^N(z^n - \sigma(b+\Vec{w}^T\Vec{x}^n))\Vec{x}^n
+\end{eqnarray}
+For simplification the term $\sigma(b+\Vec{w}^T\Vec{x}^n)$ is set to $\sigma^n$.
+
+We know that the decision boundary of $\Vec{w}$ is 0.
+\begin{eqnarray}
+\Vec{w}^T \sum_{n=1}^N (z^n-\sigma^n) \Vec{x}^n &=& 0\\
+\Leftrightarrow \sum_{n=1}^N (z^n-\sigma^n) \Vec{w}^T \Vec{x}^n &=& 0
+\end{eqnarray}
+Due to linear separability the term $\Vec{w}^T \Vec{x}^n$ is either greater or smaller than 0, greater for $z^n = 1$ and smaller for $z^n=0$. Therefore, to fulfil the condition $(z^n-\sigma^n)$ has to be equal to 0. We know that $0 \leq \sigma^n \leq 1$ and $z^n \in \{0,1\}$.
+\begin{eqnarray}
+z^n-\sigma^n &\overset{!}{=}& 0\\
+z^n &=& \sigma^n
+\end{eqnarray}
+We have to decide two cases:
+\begin{enumerate}
+\item $z^n = 0 \Rightarrow \sigma^n = 0$
+\item $z^n = 1 \Rightarrow \sigma^n = 1$
+\end{enumerate}
+
+case 1:
+
+\begin{eqnarray}
+\sigma^n = \frac{1}{1-e^{-b+\Vec{w}^T\Vec{x}^n}} = 0
+\end{eqnarray}
+$\Vec{w}^T\Vec{x}^n < 0$ due to linear separability and $z^n = 0$. With large $w_i$ the exponent goes to $-\infty$ which leads to $\sigma^n$ converging to 0.
+
+case 2:
+
+\begin{eqnarray}
+\sigma^n = \frac{1}{1-e^{-b+\Vec{w}^T\Vec{x}^n}} = 1
+\end{eqnarray}
+$\Vec{w}^T\Vec{x}^n > 0$ due to linear separability and $z^n = 1$. With large $w_i$ the exponent goes to $\infty$ which leads to $\sigma^n$ converging to 1.
+
+
+\section{Assignment: Multiclass classification}
+\paragraph*{Problem 3}
+$\;$ 
+
+Given:
+\begin{itemize}
+\item K classes
+\item prior class probabilities $p(C_k)=\pi_k$
+\item general class-conditional densities $p(\phi|C_k)$ with $\phi$ being the input feature vector
+\item training data set $\{\phi_n, t_n\}$ with $n = 1,...,N$ (independently drawn data points)
+\end{itemize}
+
+To show: MLE for prior probabilities is given by $\pi_k = \frac{N_k}{N}$ with $B_k$ being the number of points assigned to class $C_k$.
+
+Using Bayes the likelihood function is given by
+\begin{eqnarray}
+p(\{\phi_n, t_n\} | \{\pi_k\}) = \prod_{n=1}^N \prod_{k=1}^K (p(\phi_n | C_k) \pi_k)^{t_{nk}}
+\end{eqnarray}
+and the corresponding log-likelihood
+\begin{eqnarray}
+ln(p(\{\phi_n, t_n\} | \{\pi_k\}))&=&\sum_{n=1}^N \sum_{k=1}^K t_{nk} (ln(p(\phi_n | C_k)) + ln(\pi_k))\\
+&=& \sum_{n=1}^N \sum_{k=1}^K t_{nk} ln(p(\phi_n | C_k)) + t_{nk} ln(\pi_k)
+\end{eqnarray}
+Since we have an optimization problem with the constraint $\sum_{k=1}^K \pi_k = 1$, we can use a Lagrange multiplier:
+\begin{eqnarray}
+&&ln(p(\{\phi_n, t_n\} | \{\pi_k\})) + \lambda\left(\sum_{k=1}^K \pi_k - 1\right)\\
+&=& \sum_{n=1}^N \sum_{k=1}^K t_{nk} ln(p(\phi_n | C_k)) + t_{nk} ln(\pi_k) + \lambda\left(\sum_{k=1}^K \pi_k - 1\right)\\
+&=& \sum_{n=1}^N \sum_{k=1}^K t_{nk} ln(p(\phi_n | C_k)) + t_{nk} ln(\pi_k) + \lambda\pi_k - \lambda
+\end{eqnarray}
+
+The derivative w.r.t. $\pi_k$ is
+\begin{eqnarray}
+\sum_{n=1}^N  \frac{t_{nk}}{\pi_k} + \lambda
+\end{eqnarray}
+and the derivative w.r.t. $\lambda$ is
+\begin{eqnarray}
+\sum_{k=1}^K \pi_k - 1
+\end{eqnarray}
+
+Setting the first derivative equal to 0 results in the following:
+\begin{eqnarray}
+\sum_{n=1}^N  \frac{t_{nk}}{\pi_k} + \lambda &\overset{!}{=}& 0\\
+\sum_{n=1}^N  \frac{t_{nk}}{\pi_k} &=& -\lambda\\
+\sum_{n=1}^N t_{nk} = N_k &=& -\lambda \pi_k\\
+\pi_k &=& -\frac{N_k}{\lambda}
+\end{eqnarray}
+With the second derivative being set to 0:
+\begin{eqnarray}
+\sum_{k=1}^K \pi_k - 1 &\overset{!}{=}& 0\\
+\sum_{k=1}^K \pi_k &=& 1
+\end{eqnarray}
+with $\pi_k = -\frac{N_k}{\lambda}$:
+\begin{eqnarray}
+\sum_{k=1}^K -\frac{N_k}{\lambda} &=& 1\\
+\sum_{k=1}^K N_k = N &=& -\lambda 
+\end{eqnarray}
+Using this again for the calculated $\pi_k$ we have $\pi_k = \frac{N_k}{N}$.
+
+
+\section{Assignment: Bounds }
+\paragraph*{Problem 4}
+$\;$ 
+
+
+\end{document}
