@@ -224,5 +224,43 @@ Using this again for the calculated $\pi_k$ we have $\pi_k = \frac{N_k}{N}$.
 \paragraph*{Problem 4}
 $\;$ 
 
+Given:
+\begin{itemize}
+\item $n$ new test cases
+\item $X_i = 1$ if classification is wrong, else $X_i = 0$
+\item $\hat{X} = \frac{1}{n}\sum X_i$ is the observed error rate
+\item $X_i$ as a Bernoulli with unknown mean $p$
+\end{itemize}
+
+1. Question: How likely is $\hat{X}$ to not be within $\epsilon$ of $p$?\\
+2. Question: How many test cases are necessary to ensure the observed error rate is with probability at most 5\% farther than 0.01 away from the true one?
+
+1: We want to know $P(\hat{X} \leq p-\epsilon \text{ and } \hat{X} \geq p+\epsilon)$. This is the same as $P(|\hat{X} - p| \geq \epsilon)$. Therefore we can use the Chebychev inequality to find a bound.
+\begin{eqnarray}
+P(|\hat{X} - p| \geq \epsilon) &\leq& \frac{Var[\hat{X}]}{\epsilon^2}\\
+&=& \frac{E[\hat{X}^2]-(E[\hat{X}])^2}{\epsilon^2}\\
+&=& \frac{\frac{1}{n}\left(\sum_{x=0}^1 x^2 p^x (1-p)^{1-x}\right) -p^2}{\epsilon^2}\\
+&=& \frac{p - p^2}{n\epsilon^2}\\
+&=& \frac{p(1-p)}{n\epsilon^2}
+\end{eqnarray}
+
+Let $g(p) = \frac{p(1-p)}{n}$. Then $g'(p) = \frac{1-2p}{n}$. Setting this derivation to zero results in the following:
+\begin{eqnarray}
+g'(p) = \frac{1-2p}{n} \overset{!}{=} 0\\
+\Leftrightarrow p = \frac{1}{2}
+\end{eqnarray}
+Since $g''(p) = -\frac{2}{n}$, the second derivative is smaller than zero for any $p$ due to $n > 0$. Therefore, $p = \frac{1}{2}$ is a maximum.
+
+Inserting this $p$ in the inequality for the wanted probability yields in:
+\begin{eqnarray}
+P(|\hat{X} - p| \geq \epsilon) &\leq& \frac{1}{4n\epsilon^2}
+\end{eqnarray}
+
+2: $\epsilon = 0.01$ and $P(|\hat{X} - p| \geq \epsilon) = 0.05$
+\begin{eqnarray}
+\Rightarrow 0.05 \leq \frac{1}{4n\epsilon^2}\\
+\Leftrightarrow n \leq \frac{20}{e\epsilon^2} = 50000
+\end{eqnarray}
+This shows that at least 50000 new test cases are necessary.
 
 \end{document}
