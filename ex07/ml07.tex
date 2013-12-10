@@ -55,7 +55,7 @@ If both are kernels the entire term is a kernel (rule 3).
 
 To show that 1. is a kernel we have a look on the linear kernel $K_3(\Vec{x}, \Vec{y}) = \Vec{x}^T\Vec{y}$. With $\phi(z) = exp\left( -\frac{\Vec{z}^T\Vec{z}}{2\sigma^2}\right)$ and rule 4 we have the following kernel:
 \begin{eqnarray}
-K_3(\phi(\Vec{x}), \phi(\Vec{x})) &=& \phi(\Vec{x})^T\phi(\Vec{y})\\
+K_3(\phi(\Vec{x}), \phi(\Vec{y})) &=& \phi(\Vec{x})^T\phi(\Vec{y})\\
 &=& \left(exp\left( -\frac{\Vec{x}^T\Vec{x}}{2\sigma^2}\right)\right)^T exp\left( -\frac{\Vec{y}^T\Vec{y}}{2\sigma^2}\right)\\
 &=&exp\left( -\frac{\Vec{x}^T\Vec{x}}{2\sigma^2}\right) exp\left( -\frac{\Vec{y}^T\Vec{y}}{2\sigma^2}\right)
 \end{eqnarray}
