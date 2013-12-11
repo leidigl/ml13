@@ -151,6 +151,33 @@ $\;$
 \paragraph*{Problem 6}
 $\;$ 
 
+Given:
+\begin{itemize}
+\item $f(\Vec{x})$ is convex $\Rightarrow$ $f(t\Vec{x} + (1-t)\Vec{y}) \leq tf(\Vec{x})+(1-t)f(\Vec{y})$
+\item $g(\Vec{x})$ is convex $\Rightarrow$ $g(t\Vec{x} + (1-t)\Vec{y}) \leq tg(\Vec{x})+(1-t)g(\Vec{y})$
+\end{itemize}
+for $t \in [0,1]$ and any two points $\Vec{x}$, $\Vec{y}$.
+
+1. To show: $h(\Vec{x}) = f(\Vec{x}) + g(\Vec{x})$ is convex.
+
+\begin{eqnarray}
+h(t\Vec{x} + (1-t)\Vec{y}) &=& f(t\Vec{x} + (1-t)\Vec{y}) + g(t\Vec{x} + (1-t)\Vec{y})\\
+&\leq& [tf(\Vec{x})+(1-t)f(\Vec{y})] + [tg(\Vec{x})+(1-t)g(\Vec{y})]\\
+&=& tf(\Vec{x}) + tg(\Vec{x}) + (1-t)f(\Vec{y}) + (1-t)g(\Vec{y})\\
+&=& t(f(\Vec{x}) + g(\Vec{x})) + (1-t)(f(\Vec{y}) + g(\Vec{y}))\\
+&=& th(\Vec{x}) + (1-t)h(\Vec{y})
+\end{eqnarray}
+
+2. To show: $u(\Vec{x}) = cf(\Vec{x})$ with $c \geq 0$ is convex.
+
+\begin{eqnarray}
+u(t\Vec{x} + (1-t)\Vec{y}) &=& cf(t\Vec{x} + (1-t)\Vec{y})\\
+&\leq& c(tf(\Vec{x})+(1-t)f(\Vec{y}))\\
+&=& tcf(\Vec{x})+(1-t)cf(\Vec{y})\\
+&=& tu(\Vec{x})+(1-t)u(\Vec{y})
+\end{eqnarray}
+
+
 \paragraph*{Problem 7}
 $\;$ 
 
