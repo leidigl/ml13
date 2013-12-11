@@ -73,6 +73,27 @@ We could show that both terms of equation \ref{two_terms} are kernels. Therefore
 \paragraph*{Problem 2}
 $\;$ 
 
+To do: Determine $\phi(\Vec{x})$ so that
+\begin{eqnarray}
+\phi(\Vec{x})^T\phi(\Vec{y}) = exp(-\frac{|\Vec{x}-\Vec{y}|^2}{2 \sigma^2})
+\end{eqnarray}
+
+With the Taylor expansion we get:
+\begin{eqnarray}
+&&exp(-\frac{|\Vec{x}-\Vec{y}|^2}{2 \sigma^2})\\
+&=& exp\left( -\frac{\Vec{x}^T\Vec{x}}{2 \sigma^2}\right) exp\left( -\frac{\Vec{y}^T\Vec{y}}{2 \sigma^2}\right) \sum_{n=0}^{\infty}\frac{\left(\frac{\Vec{x}^T\Vec{y}}{\sigma^{2n}} \right)^n}{n!}\\
+&=& exp\left( -\frac{\Vec{x}^T\Vec{x}}{2 \sigma^2}\right) exp\left( -\frac{\Vec{y}^T\Vec{y}}{2 \sigma^2}\right) \sum_{n=0}^{\infty}\frac{\left(\Vec{x}^T\Vec{y} \right)^n}{n!\sigma^{2n}}\\
+&=& exp\left( -\frac{\Vec{x}^T\Vec{x}}{2 \sigma^2}\right) exp\left( -\frac{\Vec{y}^T\Vec{y}}{2 \sigma^2}\right) \sum_{n=0}^{\infty}\frac{\left(\sum_{t=1}^m x_t y_t \right)^n}{n!\sigma^{2n}}\\
+&=& exp\left( -\frac{\Vec{x}^T\Vec{x}}{2 \sigma^2}\right) exp\left( -\frac{\Vec{y}^T\Vec{y}}{2 \sigma^2}\right) \sum_{n=0}^{\infty}\frac{\sum_{k_1+...+k_m = n} \left(\begin{array}{c}
+n\\k_1,...,k_m
+\end{array}\right) \prod_{t=1}^m(x_t y_t)^{k_t}}{n!\sigma^{2n}}\\
+&=& exp\left( -\frac{\Vec{x}^T\Vec{x}}{2 \sigma^2}\right) exp\left( -\frac{\Vec{y}^T\Vec{y}}{2 \sigma^2}\right) \sum_{n=0}^{\infty}\frac{\sum_{k_1+...+k_m = n} \frac{n!}{k_1!...k_m!} \prod_{t=1}^m(x_t y_t)^{k_t}}{n!\sigma^{2n}}\\
+&=& exp\left( -\frac{\Vec{x}^T\Vec{x}}{2 \sigma^2}\right) exp\left( -\frac{\Vec{y}^T\Vec{y}}{2 \sigma^2}\right) \sum_{n=0}^{\infty}\sum_{k_1+...+k_m = n} \frac{1}{k_1!...k_m!\sigma^{2n}} \prod_{t=1}^m x_t^{k_t} \prod_{t=1}^m y_t^{k_t}\\
+&=& \sum_{n=0}^{\infty}\sum_{k_1+...+k_m = n} \left[exp\left( -\frac{\Vec{x}^T\Vec{x}}{2 \sigma^2}\right) \frac{\prod_{t=1}^m x_t^{k_t}}{k_1!...k_m!\sigma^{2n}}\right] \left[exp\left( -\frac{\Vec{y}^T\Vec{y}}{2 \sigma^2}\right) \frac{ \prod_{t=1}^m y_t^{k_t}}{k_1!...k_m!\sigma^{2n}}\right]
+\end{eqnarray}
+The inner product of the last equation is split into $\Vec{x}$ and $\Vec{y}$ and is therefore the inner product of the infinite-dimensional feature space.
+
+
 \paragraph*{Problem 3}
 $\;$ 
 
