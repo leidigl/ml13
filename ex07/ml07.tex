@@ -116,8 +116,9 @@ w - x_i $ else$
 \end{eqnarray}
 with
 \begin{eqnarray}
-z_i = sgn(\phi(x)^Tw +b)
+z_i = f(\phi(x)^Tw +b)
 \end{eqnarray}
+where $f(x)=1$ if $x>0$ and $f(x)=0$ else.\\
 Let i index the steps of updating the learning rule or better the subsets of the sample points, that were still misclassified during the update steps, $t_i \in {-1,1}$ and $\alpha_i$ being the number of times, the sample points $x_i$ where used during the whole update procedure. The perceptron learning rule can also be written as a linear combination:
 \begin{eqnarray}
 w = \sum_{i=1}^{l} \alpha_i t_i \phi(x_i)
@@ -125,9 +126,9 @@ w = \sum_{i=1}^{l} \alpha_i t_i \phi(x_i)
 \end{eqnarray}
 and the prediction rule can be derived as 
 \begin{eqnarray}
-z &=& sgn(\phi(x^T) w+b)\\
-&=& sgn(\phi(x)^T \sum_{i=1}^{l} \alpha_i t_i \phi(x_i) +b)\\
-&=& sgn(\sum_{i=1}^{l} \alpha_i t_i (\phi(x)^T \phi(x_i)) +b)
+z &=& f(\phi(x^T) w+b)\\
+&=& f(\phi(x)^T \sum_{i=1}^{l} \alpha_i t_i \phi(x_i) +b)\\
+&=& f(\sum_{i=1}^{l} \alpha_i t_i (\phi(x)^T \phi(x_i)) +b)
 \end{eqnarray}
 As $alpha_i$ is incremented, whenever the subset indexed by $i$ is still misclassified during the update steps, one can write formally:
 \begin{eqnarray}
