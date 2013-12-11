@@ -196,4 +196,15 @@ g(t\Vec{x} + (1-t)\Vec{y}) &=& \max_{\lambda}f_{\lambda}(t\Vec{x} + (1-t)\Vec{y}
 \paragraph*{Problem 8}
 $\;$ 
 
+To show: Lagrange dual function $g(\alpha) = \min_x L(x,\alpha)$ is concave.
+
+A function $f(x)$ is concave if and only if $-f(x)$ is convex. Therefore, we have to show that $-g(\alpha)$ is a convex function. $L(x, \alpha)$ is an affine function which means that it is both concave and convex for all $\alpha$.
+
+\begin{eqnarray}
+-g(\alpha) &=& -\min_x L(x,\alpha)\\
+&=& \max_x -L(x,\alpha)
+\end{eqnarray}
+
+Since $L(x, \alpha)$ is both convex and concave, $-L(x, \alpha)$ is also convex and concave. Therefore, $-g(\alpha)$ describes the pointwise maximum of a family of convex functions. From Problem 7 we know that these functions are convex. This means that $-g(\alpha)$ is convex and therefore $g(\alpha)$ is concave.
+
 \end{document}
