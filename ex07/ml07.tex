@@ -181,6 +181,18 @@ u(t\Vec{x} + (1-t)\Vec{y}) &=& cf(t\Vec{x} + (1-t)\Vec{y})\\
 \paragraph*{Problem 7}
 $\;$ 
 
+Given: family of convex functions $f_{\lambda}(\Vec{x})$. $\forall \lambda \in \mathbb{R}: f_{\lambda}(\Vec{x})$ is convex.
+
+To show: The pointwise maximum $g(\Vec{x}) = \max_{\lambda}f_{\lambda}(\Vec{x})$ is convex.
+
+\begin{eqnarray}
+g(t\Vec{x} + (1-t)\Vec{y}) &=& \max_{\lambda}f_{\lambda}(t\Vec{x} + (1-t)\Vec{y})\\
+&\leq& \max_{\lambda}\left( tf_{\lambda}(\Vec{x}) + (1-t)f_{\lambda}(\Vec{y})\right)\\
+&=& \max_{\lambda}\left( tf_{\lambda}(\Vec{x})\right) + \max_{\lambda}\left((1-t)f_{\lambda}(\Vec{y})\right)\\
+&=& t\max_{\lambda}\left( f_{\lambda}(\Vec{x})\right) + (1-t)\max_{\lambda}\left(f_{\lambda}(\Vec{y})\right)\\
+&=& tg(\Vec{x}) + (1-t)g(\Vec{y})
+\end{eqnarray}
+
 \paragraph*{Problem 8}
 $\;$ 
 
