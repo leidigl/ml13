@@ -95,7 +95,7 @@ The inner product of the last equation is split into $\Vec{x}$ and $\Vec{y}$ and
 
 
 \paragraph*{Problem 3}
-$\;$ 
+For linear regression with RBFs one has to train the weights corresponding to all the feature vectors, to fit the data  with these basis functions as good as possible. As one has to calculate the pseudo inverse of the feature vectors/basis functions, the complexity is cubic with respect to the number if basis functions. In higher dimensional feature spaces, this may lead to unbearable computational expensiveness, as the number of feature vectors increases exponentially with the number of dimensions. To handle this problem, the dual representation of the RBFs can be derived, so one has only to calculate the pseudo inverse of the kernel matrix. As the calculation of the kernel matrix only depends on the number of training samples, the complexity reduces to cubic with respect to the number of training samples. 
 
 \section{Assignment: Kernel Perceptron}
 \paragraph*{Problem 4}
