@@ -35,6 +35,9 @@
 \newcommand{\Mtx}[1]{\ensuremath{\mathbf{#1}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 
+\usepackage[numbered]{mcode}
+\usepackage{graphicx}
+
 
 \begin{document}
 \maketitle
@@ -48,6 +51,27 @@ $\;$
 \paragraph*{Problem 2}
 $\;$ 
 
+We computed the values using Matlab. Here is the Matlab code:
+
+\lstinputlisting{kernel.m}
+
+\lstinputlisting{ex2.m}
+
+For $l=1$ we get a mean value $\overline{y_*}$ of 0.3521 for both $x_*$.
+
+The plots for different parameters $l$ follow on the next pages:
+
+\begin{figure}[]
+\centering
+\includegraphics[width=\textwidth]{plots/page1.pdf}
+\label{fig:mammary_structure}
+\end{figure}
+
+\begin{figure}[]
+\centering
+\includegraphics[width=\textwidth]{plots/page2.pdf}
+\label{fig:mammary_structure}
+\end{figure}
 
 
 \end{document}
