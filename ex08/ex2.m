@@ -26,9 +26,13 @@ for x = 1:size(Xstar,2)
     
     f = zeros(size(X,2),1);
     for i = 1:size(X,2)
-        f(i) = normpdf(X(i), 0, kernel(X(i), X(i)));
+        f(i) = normpdf(X(i), 0, kernel(X(i), X(i), l));
     end
     
     YstarMean(x) = Kstar'*inv(K)* f;
+    
+    sigmaStar = KstarStar - Kstar'*inv(K)*Kstar;
+    %Ystar = normplot
+    
 end
 
