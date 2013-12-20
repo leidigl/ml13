@@ -1,4 +1,4 @@
-l = 0;
+l = 1;
 
 X = [-0.8372, -0.4558, 0.6902, 0.1114, -0.4678];
 Y = [-1.1414, -1.5286, -1.1893, -1.9021, -1.5595];
@@ -24,6 +24,11 @@ for x = 1:size(Xstar,2)
     
     KstarStar = kernel(Xstar(x), Xstar(x), l);
     
-    YstarMean(x) = Kstar'*inv(K)* normpdf(Xstar(x), 0, KstarStar);
+    f = zeros(size(X,2),1);
+    for i = 1:size(X,2)
+        f(i) = normpdf(X(i), 0, kernel(X(i), X(i)));
+    end
+    
+    YstarMean(x) = Kstar'*inv(K)* f;
 end
 
