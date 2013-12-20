@@ -1,4 +1,6 @@
-l = 1;
+close all;
+
+l = 0.05;
 
 X = [-0.8372, -0.4558, 0.6902, 0.1114, -0.4678];
 Y = [-1.1414, -1.5286, -1.1893, -1.9021, -1.5595];
@@ -34,5 +36,7 @@ for x = 1:size(Xstar,2)
     sigmaStar = KstarStar - Kstar'*inv(K)*Kstar;
     %Ystar = normplot
     
+    figure;
+    plot(-1:0.001:1,normpdf(-1:0.001:1,YstarMean(x),sigmaStar));
 end
 
