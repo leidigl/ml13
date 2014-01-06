@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{ml1_homework_template}
-
+\usepackage{amsmath}
+\usepackage{amssymb}
 % please submit the corresponding pdf by email to
 % homework@class,brml.org, and write "homework sheet xx" in the 
 % title.  No more, no less!  (Instead of xx, however,
@@ -8,17 +9,17 @@
 
 % Please update the following line, only change XX to the homework
 % sheet number
-\title{homework sheet XX}
+\title{homework sheet 09}
 
 
 \author{
-\name{Jade Shade}\\
-\imat{1627482920}\\
-\email{jade@shade.com}
+\name{Andre Seitz}\\
+\imat{03622870}\\
+\email{andre.seitz@mytum.de}
 \And
-\name{Pete Sheet} \\
-\imat{4872903849}\\
-\email{pete@sheet.com}
+\name{Linda Leidig} \\
+\imat{03608416}\\
+\email{linda.leidig@tum.de}
 }
 
 % The \author macro works with any number of authors. There are two commands
@@ -29,18 +30,61 @@
 % puts 3 of 4 authors names on the first line, and the last on the second
 % line, try using \AND instead of \And before the third author name.
 
+\renewcommand{\Vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Mtx}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
 
+\usepackage{graphicx}
 
 \begin{document}
 \maketitle
 
-\section{Assignment: multiply two matrices}
-The solution to assignment 1 is simple.
+\section{Assignment: Optimization and Convexity}
+\paragraph*{Problem 1}
+$\;$ 
 
-\section{Assignment: invert a singular matrix}
-The solution to assignment 1 is unknown to us.
+A function $f$ is strictly convex if the value of $f$ at any point between the two points $\Vec{x},\Vec{y} \in \mathcal{X}$ except themselves is smaller than the value of the linear function $g$ that intersects the two points $\Vec{x}$ and $\Vec{y}$ at the considered point. In contrast, convex functions are also allowed to lie directly on this linear function $g$. Therefore, a linear function is convex but not strictly convex and a strictly convex function is not allowed to have any linear parts.
 
-\section{Assignment: a shorter solution to Fermat's last theorem }
-Assignment 3 is solved, but takes too much space to write down here.
+\paragraph*{Problem 2}
+$\;$ 
+
+If a function $f(\Vec{x})$ is convex, at most infinitely many $\Vec{x}^*$ can satisfy the equation $f(\Vec{x}^*) = min_xf(\Vec{x})$. In particular, this holds for constant functions that are convex functions per definition. Their value is the same for all possible $\Vec{x}^*$ which are infinitely many. As the function has only one value this is the minimum value.
+
+\paragraph*{Problem 3}
+$\;$ 
+
+If a function $f(\Vec{x})$ is strictly convex, there is exactly one $\Vec{x}^*$ that can satisfy the equation $f(\Vec{x}^*) = min_xf(\Vec{x})$. The only case that there are more than one $\Vec{x}^*$ fulfilling this condition is if the function consists of parts that are constant. But, this is not possible for strictly convex functions as they are not allowed to have linear parts as described in Problem 1. Since constant functions are also linear, there is only one $\Vec{x}^*$ that fulfils the condition $f(\Vec{x}^*) = min_xf(\Vec{x})$.
+
+\paragraph*{Problem 4}
+$\;$ 
+
+strictly convex function: $f(x) = \frac{5}{7}x^2-10$\\
+convex function: $g(x) = 4x$
+
+See Figure \ref{convex}.
+
+\begin{figure}[]
+\centering
+\includegraphics{convex.pdf}
+\caption{A strictly convex and a non-strictly convex function.}
+\label{convex}
+\end{figure}
+
+
+\section{Assignment: The Gaussian kernel for classification}
+\paragraph*{Problem 5}
+$\;$
+
+
+
+\paragraph*{Problem 6}
+$\;$ 
+
+\paragraph*{Problem 7}
+$\;$ 
+
+\section{Assignment: The SVM optimisation problem}
+\paragraph*{Problem 8}
+$\;$ 
 
 \end{document}
