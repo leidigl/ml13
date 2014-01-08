@@ -48,7 +48,7 @@ A function $f$ is strictly convex if the value of $f$ at any point between the t
 \paragraph*{Problem 2}
 $\;$ 
 
-If a function $f(\Vec{x})$ is convex, at most infinitely many $\Vec{x}^*$ can satisfy the equation $f(\Vec{x}^*) = min_xf(\Vec{x})$. In particular, this holds for constant functions that are convex functions per definition. Their value is the same for all possible $\Vec{x}^*$ which are infinitely many. As the function has only one value this is the minimum value.
+If a function $f(\Vec{x})$ is convex, at most infinite many $\Vec{x}^*$ can satisfy the equation $f(\Vec{x}^*) = min_xf(\Vec{x})$. In particular, this holds for constant functions that are convex functions per definition. Their value is the same for all possible $\Vec{x}^*$ which are infinite many. As the function has only one value this is the minimum value.
 
 \paragraph*{Problem 3}
 $\;$ 
@@ -63,7 +63,7 @@ convex function: $g(x) = 4x$
 
 See Figure \ref{convex}.
 
-\begin{figure}[]
+\begin{figure}[ht]
 \centering
 \includegraphics{convex.pdf}
 \caption{A strictly convex and a non-strictly convex function.}
@@ -75,10 +75,23 @@ See Figure \ref{convex}.
 \paragraph*{Problem 5}
 $\;$
 
-
+No, it is not possible to apply this infinite dimensional feature map directly since it is not possible to express infinite many basis functions. Therefore, kernels or the dual representation is the solution as its complexity depends on the number of data samples rather than the number of basis functions which is in this case infinite.
 
 \paragraph*{Problem 6}
 $\;$ 
+
+\begin{eqnarray}
+&&K(x,y)\\
+&=& \sum_{i=1}^{\infty} \Phi_{\infty,i}(x) \Phi_{\infty,i}(y)\\
+&=& e^{\frac{-x^2}{2\sigma^2}}e^{\frac{-y^2}{2\sigma^2}} + e^{\frac{-x^2}{2\sigma^2}}\frac{x}{\sigma}e^{\frac{-y^2}{2\sigma^2}}\frac{y}{\sigma} + \frac{e^{\frac{-x^2}{2\sigma^2}}\left(\frac{x}{\sigma}\right)^2}{\sqrt{2}}\frac{e^{\frac{-y^2}{2\sigma^2}}\left(\frac{y}{\sigma}\right)^2}{\sqrt{2}}+...+ \frac{e^{\frac{-x^2}{2\sigma^2}}\left(\frac{x}{\sigma}\right)^i}{\sqrt{i!}}\frac{e^{\frac{-y^2}{2\sigma^2}}\left(\frac{y}{\sigma}\right)^i}{\sqrt{i!}}+...\\
+&=& \frac{e^{\frac{-x^2-y^2}{2\sigma^2}}\left( \frac{xy}{\sigma^2} \right)^0}{0!} + \frac{e^{\frac{-x^2-y^2}{2\sigma^2}}\left( \frac{xy}{\sigma^2} \right)^1}{1!} + \frac{e^{\frac{-x^2-y^2}{2\sigma^2}}\left( \frac{xy}{\sigma^2} \right)^2}{2!} + ... + \frac{e^{\frac{-x^2-y^2}{2\sigma^2}}\left( \frac{xy}{\sigma^2} \right)^i}{i!} + ...\\
+&=& \sum_{n = 0}^{\infty} \frac{e^{\frac{-x^2-y^2}{2\sigma^2}}\left( \frac{xy}{\sigma^2} \right)^n}{n!}\\
+&=& e^{\frac{-x^2-y^2}{2\sigma^2}} \sum_{n = 0}^{\infty} \frac{\left( \frac{xy}{\sigma^2} \right)^n}{n!}\\ 
+&=& e^{\frac{-x^2-y^2}{2\sigma^2}} e^{\frac{xy}{\sigma^2}}\\
+&=& e^{\frac{-x^2-y^2+2xy}{2\sigma^2}}
+\end{eqnarray}
+
+Yes, with such high-dimensional feature space we should be concerned about overfitting.
 
 \paragraph*{Problem 7}
 $\;$ 
