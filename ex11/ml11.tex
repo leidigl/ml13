@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage{ml1_homework_template}
+\usepackage{amsmath}
+\usepackage{amssymb}
+% please submit the corresponding pdf by email to
+% homework@class,brml.org, and write "homework sheet xx" in the 
+% title.  No more, no less!  (Instead of xx, however,
+% put the decimal number of the homework sheet.)
+
+% Please update the following line, only change XX to the homework
+% sheet number
+\title{homework sheet 11}
+
+
+\author{
+\name{Andre Seitz}\\
+\imat{03622870}\\
+\email{andre.seitz@mytum.de}
+\And
+\name{Linda Leidig} \\
+\imat{03608416}\\
+\email{linda.leidig@tum.de}
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+\renewcommand{\Vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Mtx}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\showeq}{\overset{!}{=}}
+
+\usepackage{graphicx}
+
+\begin{document}
+\maketitle
+
+\section{Activation Functions}
+
+\paragraph*{Problem 1}
+$\;$ 
+
+Let $\sigma(x)$:
+\begin{eqnarray}
+\sigma(x) = \frac{1}{1+exp(-x)} \\
+\end{eqnarray}
+
+By transforming $tanh$ we get:
+\begin{eqnarray}
+\tanh(x) &=& \frac{exp(x) - exp(-x)}{exp(x) + exp(-x)}  = \frac{exp(x) - exp(-x)}{exp(x) + exp(-x)} \cdot \frac{exp(-x)}{exp(-x)}\\
+&=& \frac{1 - exp(-2x)}{1 + exp(-2x)} \\
+&=& \frac{2}{1 + exp(-2x)} - \frac{1 + exp(-2x)}{1+exp(-2x)} \\
+&=& \frac{2}{1 + exp(-2x)} -1 \\
+&=& 2 \cdot \frac{1}{1 + exp(-2x)} -1\\
+&=& 2 \cdot \sigma(2x) -1
+\end{eqnarray}
+ 
+As the output values of the network are modeled as a linear combination of the hidden layer values evaluated by some non-linear hidden layer activation function, one can easily switch between networks using sigmoid activation functions and activation functions build upon $tanh$, but still have the same network, by differing the weight.
+
+The ouput values are defined as:
+\begin{eqnarray}
+a_{out} = \sum_{j=1}^{M} w_{kj}^{(2)} h(a_j) + w_{k0}^{(2)}
+\end{eqnarray}
+where
+\begin{eqnarray}
+a_j = \sum_{i=1}^D w_{ij}^{(1)} x_i + w_{j0}^{(1)}\\
+\end{eqnarray}
+and $h(x)$ is called the activation function.
+
+Obviously one can either use 
+\begin{eqnarray}
+h(x) = tanh(x)
+\end{eqnarray}
+with weights $w$ as given above, or
+\begin{eqnarray}
+h(x) = \sigma(x) = \frac{1}{1 + exp(-x)}
+\end{eqnarray}
+with weights
+\begin{eqnarray}
+u^{(1)} &=& 2 \cdot w^{(1)}\\
+u_{kj}^{(2)} &=& 2\cdot w{kj}^{(2)}\\
+u_{k0}^{(2)} &=& w_{k0}^{(2)}-1
+\end{eqnarray}
+
+\paragraph*{Problem 2}
+$\;$
+Derivation of the sigmoid activation function:
+\begin{eqnarray}
+\sigma(x)' &=& \left( \frac{1}{1 + exp(-x)} \right)' \\
+&=& \left( \frac{(1 + exp(-x))'}{(1 + exp(-x))^2} \right)\\
+&=& \left( \frac{-exp(-x)}{(1 + exp(-x))^2} \right)\\
+&=& (-exp(-x)) \cdot \sigma(x)^2
+\end{eqnarray}
+
+Derivation of the $tanh$ activation function:
+\begin{eqnarray}
+tanh(x)' &=& (2 \cdot \sigma(2x) -1)'\\
+&=& 2 \cdot \sigma(2x)' \\
+&=& 2 \cdot \left( \frac{1}{1 + exp(-2x)} \right)' \\
+&=& 2 \cdot \left( \frac{(1 + exp(-2x))'}{(1 + exp(-2x))^2} \right)\\
+&=& 2 \cdot \left( \frac{-2 \cdot exp(-2x)}{(1 + exp(-2x))^2} \right)\\
+&=& -2 \cdot exp(-2x) \cdot \sigma(2x)^2\\
+\end{eqnarray}
+
+\section{Multiple targets}
+
+\paragraph*{Problem 3}
+$\;$ 
+
+\paragraph*{Problem 4}
+$\;$ 
+
+\section{Error functions}
+
+\paragraph*{Problem 5}
+$\;$
+
+\paragraph*{Problem 6}
+$\;$ 
+
+\paragraph*{Problem 7}
+$\;$ 
+
+\section{Robust classification}
+
+\paragraph*{Problem 8}
+$\;$ 
+
+\end{document}
