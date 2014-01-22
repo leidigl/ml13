@@ -113,13 +113,105 @@ tanh(x)' &=& (2 \cdot \sigma(2x) -1)'\\
 \paragraph*{Problem 3}
 $\;$ 
 
+Let the conditional distribution for multiple target variables, independent conditional on $x$ and $w$ with shared noise $\beta$ be:
+\begin{eqnarray}
+p(t | x,w) &=& \mathcal{N}(\Vec{t} | z(\Vec{x},w), \beta^{-1}I)\\
+&=& \frac{1}{(2\pi)^{D/2}}\cdot \frac{1}{|\beta^{-1}I |^{1/2}}\cdot exp \left( -\frac{1}{2} (\Vec{t}-z(\Vec{x},w))^T(\beta^{-1}I)^{-1}(\Vec{t}-z(\Vec{x},w))\right)
+\end{eqnarray}
+with the respective likelihood:
+\begin{eqnarray}
+\prod_{n=1}^N\mathcal{N}(t_n | z(x_n,w), \beta^{-1}I)
+\end{eqnarray}
+
+To maximise the likelihood, one can also use the loglikelihood, and minimise its negative function:
+\begin{eqnarray}
+-ln\left[ \prod_{n=1}^N\mathcal{N}(t_n | z(x_n,w), \beta^{-1}I) \right] &=&\\
+-\sum_{n=1}^N ln\mathcal{N}(t_n | z(x_n,w), \beta^{-1}I)
+\end{eqnarray}
+
+To find the extrema of this term, one tries to find the zero crossings of its derivation with respect to $w$:
+\begin{eqnarray}
+\left\{ -\frac{1}{2}\sum_{n=1}^N \frac{1}{(2\pi)^{D/2}}\cdot \frac{1}{|\beta^{-1}I |^{1/2}}\cdot \left( (t_n-z(x_n,w))^T(\beta^{-1}I)^{-1}(t_n-z(x_n,w))\right)\right\}' &=& \\
+\left\{ \frac{N}{(2\pi)^{D/2}}\cdot \frac{N}{|\beta^{-1}I |^{1/2}} -\frac{1}{2}\sum_{n=1}^N \left( (t_n-z(x_n,w))^T(\beta^{-1}I)^{-1}(t_n-z(x_n,w))\right)\right\}' &=& \\
+\left\{ -\frac{1}{2} \sum_{n=1}^N \left((t_n-z(x_n,w))^T(\beta^{-1}I)^{-1}(t_n-z(x_n,w))\right)\right\}' &=& \\
+\left\{ -\frac{\beta}{2} \cdot \sum_{n=1}^N \left( ||t_n-z(x_n,w)||^2 \right) \right\}'
+\end{eqnarray}
+
+This is obviously proportional to minimising the sum-of-squares-error, which first order derivation is defined as:
+\begin{eqnarray}
+E(w) = \left\{ \frac{1}{2} \cdot \sum_{n=1}^N \left( ||z(x_n,w)-t_n||^2 \right) \right\}'
+\end{eqnarray}
+
 \paragraph*{Problem 4}
 $\;$ 
+
+Let the conditional distribution for multiple target variables, independent conditional on $x$ and $w$ with covariance matrix $\Sigma$ be:
+\begin{eqnarray}
+p(t | x,w) &=& \mathcal{N}(\Vec{t} | z(\Vec{x},w), \Sigma)\\
+&=& \frac{1}{(2\pi)^{D/2}}\cdot \frac{1}{|\Sigma |^{1/2}}\cdot exp \left( -\frac{1}{2} (\Vec{t}-z(\Vec{x},w))^T(\Sigma)^{-1}(\Vec{t}-z(\Vec{x},w))\right)
+\end{eqnarray}
+with the respective likelihood:
+\begin{eqnarray}
+\prod_{n=1}^N\mathcal{N}(t_n | z(x_n,w), \Sigma)
+\end{eqnarray}
+
+As shown above, one can find the maximum likelihood by maximizing:
+\begin{eqnarray}
+ln \left( \prod_{n=1}^N\mathcal{N}(t_n | z_n(x,w), \Sigma) \right) &=& \\
+- \sum_{n=1}^N  ln \left( \mathcal{N}(t_n | z_n(x,w), \Sigma) \right) &=& \\
+- \sum_{n=1}^N  ln \left( \frac{1}{(2\pi)^{D/2}}\cdot \frac{1}{|\Sigma |^{1/2}}\cdot exp \left( -\frac{1}{2} (t_n-z_n(x,w))^T(\Sigma)^{-1}(t_n-z_n(x,w))\right) \right) &=& \\
+- ln \frac{N}{(2\pi)^{D/2}} - ln \frac{N}{|\Sigma |^{1/2}} -\sum_{n=1}^N  ln \left( exp \left( -\frac{1}{2} (t_n-z_n(x,w))^T(\Sigma)^{-1}(t_n-z_n(x,w))\right) \right) &=& \\
+- ln \frac{N}{(2\pi)^{D/2}} - ln \frac{N}{|\Sigma |^{1/2}} -\frac{1}{2} \sum_{n=1}^N \left((t_n-z_n(x,w))^T(\Sigma)^{-1}(t_n-z_n(x,w))\right) &=& \\
+- \frac{ND}{2}ln(2\pi) - \frac{N}{2} ln (|\Sigma|) -\frac{1}{2} \sum_{n=1}^N \left((t_n-z_n(x,w))^T(\Sigma)^{-1}(t_n-z_n(x,w))\right)
+\end{eqnarray}
+
+Assuming $\Sigma$ as fixed an known, one can rewrite the term (stash constants, multiply by $-1$) and thereby state the energy function, that has to be minimized:
+\begin{eqnarray}
+E(w) = \frac{1}{2} \sum_{n=1}^N \left((t_n-z_n(x,w))^T(\Sigma)^{-1}(t_n-z_n(x,w))\right)
+\end{eqnarray}
+
+The energy function can be calculated with respect to $\Sigma$ too, which is:
+\begin{eqnarray}
+E(\Sigma) &=& -\frac{N}{2} ln (|\Sigma|) -\frac{1}{2} \sum_{n=1}^N \left((t_n-z_n(x,w))^T(\Sigma)^{-1}(t_n-z_n(x,w))\right)\\
+&=& -\frac{N}{2} ln (|\Sigma|) - \frac{1}{2} Tr\left( (\Sigma)^{-1} \sum_{n=1}^N (t_n-z_n(x,w))(t_n-z_n(x,w))^T\right)\\
+\end{eqnarray}
+
+The energy function can be maximized now by setting the derivative (with respect to $\Sigma^{-1}$) to zero, and solving for $\Sigma$:
+\begin{eqnarray}
+\left[ -\frac{N}{2} ln (|\Sigma|) - \frac{1}{2} Tr\left( (\Sigma)^{-1} \sum_{n=1}^N (t_n-z_n(x,w))(t_n-z_n(x,w))^T\right) \right]' = 0\\
+\left[ N \cdot ln (\frac{1}{|\Sigma^{-1}|}) + Tr\left( (\Sigma)^{-1} \sum_{n=1}^N (t_n-z_n(x,w))(t_n-z_n(x,w))^T\right) \right]' = 0\\
+-N \cdot (\Sigma)^{T} + \left(\sum_{n=1}^N (t_n-z_n(x,w))(t_n-z_n(x,w))^T \right)^T = 0\\
+\left(\sum_{n=1}^N (t_n-z_n(x,w))(t_n-z_n(x,w))^T \right)^T = N \cdot (\Sigma)^{T}\\
+\sum_{n=1}^N (t_n-z_n(x,w))(t_n-z_n(x,w))^T = N \cdot \Sigma\\
+\frac{1}{N}\sum_{n=1}^{N} (t_n-z_n(x,w))(t_n-z_n(x,w))^T = \Sigma
+\end{eqnarray}
 
 \section{Error functions}
 
 \paragraph*{Problem 5}
 $\;$
+
+The cross entropy error function, matching the given constraints is defined as:
+\begin{eqnarray}
+E(w) = - \sum_{n=1}^N \sum_{k=1}^K t_{kn} ln(z_k(x_n,w))
+\end{eqnarray}
+
+For $z_k(x,w) = p(t_k = 1 | x)$, the conditional distribution of a target vector is:
+\begin{eqnarray}
+p(t | w_1, \dots, w_K) = \prod_{k=1}^K z_k^{t_k}
+\end{eqnarray}
+The likelihood can be constructed as the following (given $N$ data points):
+\begin{eqnarray}
+p(t,w_1,\dots,w_K) = \prod_{n=1}^N \prod_{k=1}^K y_{nk}^{t_k}
+\end{eqnarray}
+The respective error function (which can be used to minimize the error) can be derived by taking the negative log:
+\begin{eqnarray}
+-ln (p(t,w_1,\dots,w_K)) &=& -ln(\prod_{n=1}^N \prod_{k=1}^K z_k(x_n,w)^{t_{nk}}) \\
+&=& -\sum_{n=1}^N ln(\prod_{k=1}^K z_k(x_n,w)^{t_{nk}})\\
+&=& -\sum_{n=1}^N \sum_{k=1}^K ln(z_k(x_n,w)^{t_{nk}}) \\
+&=& -\sum_{n=1}^N \sum_{k=1}^K t_{nk} \cdot ln(z_k(x_n,w)) \\
+\end{eqnarray}
+This exactly equals the cross entropy error function.
 
 \paragraph*{Problem 6}
 $\;$ 
