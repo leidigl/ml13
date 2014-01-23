@@ -93,9 +93,9 @@ $\;$
 Derivation of the sigmoid activation function:
 \begin{eqnarray}
 \sigma(x)' &=& \left( \frac{1}{1 + exp(-x)} \right)' \\
-&=& \left( \frac{(1 + exp(-x))'}{(1 + exp(-x))^2} \right)\\
-&=& \left( \frac{-exp(-x)}{(1 + exp(-x))^2} \right)\\
-&=& (-exp(-x)) \cdot \sigma(x)^2
+&=& -\left( \frac{(1 + exp(-x))'}{(1 + exp(-x))^2} \right)\\
+&=& \left( \frac{exp(-x)}{(1 + exp(-x))^2} \right)\\
+&=& exp(-x) \cdot \sigma(x)^2
 \end{eqnarray}
 
 Derivation of the $tanh$ activation function:
@@ -103,9 +103,9 @@ Derivation of the $tanh$ activation function:
 tanh(x)' &=& (2 \cdot \sigma(2x) -1)'\\
 &=& 2 \cdot \sigma(2x)' \\
 &=& 2 \cdot \left( \frac{1}{1 + exp(-2x)} \right)' \\
-&=& 2 \cdot \left( \frac{(1 + exp(-2x))'}{(1 + exp(-2x))^2} \right)\\
-&=& 2 \cdot \left( \frac{-2 \cdot exp(-2x)}{(1 + exp(-2x))^2} \right)\\
-&=& -2 \cdot exp(-2x) \cdot \sigma(2x)^2\\
+&=& 2 \cdot \left( \frac{(1 + exp(-2x))'}{-(1 + exp(-2x))^2} \right)\\
+&=& 2 \cdot \left( \frac{2 \cdot exp(-2x)}{(1 + exp(-2x))^2} \right)\\
+&=& 2 \cdot exp(-2x) \cdot \sigma(2x)^2
 \end{eqnarray}
 
 \section{Multiple targets}
@@ -139,7 +139,7 @@ To find the extrema of this term, one tries to find the zero crossings of its de
 
 This is obviously proportional to minimising the sum-of-squares-error, which first order derivation is defined as:
 \begin{eqnarray}
-E(w) = \left\{ \frac{1}{2} \cdot \sum_{n=1}^N \left( ||z(x_n,w)-t_n||^2 \right) \right\}'
+E(w) = \frac{1}{2} \cdot \sum_{n=1}^N \left( ||z(x_n,w)-t_n||^2 \right)
 \end{eqnarray}
 
 \paragraph*{Problem 4}
