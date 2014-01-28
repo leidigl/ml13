@@ -43,7 +43,33 @@
 \paragraph*{Problem 1}
 $\;$ 
 
+given: K isotropic Gaussians, each with covariance $\Mtx{\Sigma} = \sigma^2 \Mtx{I}$
 
+To show: If $\sigma \rightarrow 0$, the EM algorithm for MoG converges to the K-means algorithm.
+
+If the covariances converge to 0, the center of the Gaussians i.e. the location of the mean has a very high value while its surrounding converges to 0. Therefore, each Gaussian can be represented as a single point correlating with the center of the clusters of the K-means.
+
+formal solution: In the E-step for MoG the posterior probability or responsibility $\gamma(z_k) = p(z_k = 1 | \Vec{x})$ has to be evaluated where $z_k$ is in the 1-of-K coding scheme. This comes up with the probability that the $k^{th}$ Gaussian is responsible for the data point $\Vec{x}$ under the condition that $\Vec{x}$ is already known.
+
+\begin{eqnarray}
+\gamma(z_k) &=& p(z_k=1|\Vec{x})\\
+&=& \frac{p(z_k=1)p(\Vec{x}|z_k=1)}{\sum_{j=1}^{K}p(z_j=1)p(\Vec{x}|z_j=1)}\\
+&=& \frac{\pi_k \mathcal{N}(\Vec{x}|\Vec{\mu_k}, \Mtx{\Sigma})}{\sum_{j=1}^K \pi_j \mathcal{N}(\Vec{x}|\Vec{\mu_j}, \Mtx{\Sigma})}\\
+&=& \frac{\pi_k exp\left(\frac{-||\Vec{x}-\Vec{\mu_k}||^2}{2\sigma^2}\right)}{\sum_{j=1}^K \pi_j exp\left(\frac{-||\Vec{x}-\Vec{\mu_j}||^2}{2\sigma^2}\right)}\\
+&=& \frac{1}{\frac{1}{\pi_k exp\left(\frac{-||\Vec{x}-\Vec{\mu_k}||^2}{2\sigma^2}\right)}\sum_{j=1}^K \pi_j exp\left(\frac{-||\Vec{x}-\Vec{\mu_j}||^2}{2\sigma^2}\right)}\\
+&=& \frac{1}{\sum_{j=1}^K \frac{\pi_j}{\pi_k} exp\left(\frac{-||\Vec{x}-\Vec{\mu_j}||^2 + ||\Vec{x}-\Vec{\mu_k}||^2}{2\sigma^2}\right)}
+\end{eqnarray}
+
+Now we have to consider two cases:
+\begin{enumerate}
+\item $k$ is the closest component to $\Vec{x}$: The difference between the data point $\Vec{x}$ and the mean of $k$ is the smallest such that all the other distances between $\Vec{x}$ and the means of the other Gaussians is bigger. Therefore, the following holds $-||\Vec{x}-\Vec{\mu_j}||^2 + ||\Vec{x}-\Vec{\mu_k}||^2 \leq 0$ for all $j$. If $\sigma \rightarrow 0$, the value within the $exp$ is $-\infty$ for all $j \neq k$ and for $k$ it is equal to 0. Therefore, the entire denominator is 1 and with it the whole value for $\gamma(z_k)$.
+\item $k$ is not the closest component to $\Vec{x}$: Then another $c$ exists that is the closest Gaussian to $\Vec{x}$. For this the following holds: $-||\Vec{x}-\Vec{\mu_c}||^2 + ||\Vec{x}-\Vec{\mu_k}||^2 > 0$. For $\sigma \rightarrow 0$, the value within the $exp$ converges to $+\infty$. Therefore, the whole denominator and whole value for $\gamma(z_k)$ converge to $+\infty$.
+\end{enumerate}
+
+All in all this is equal to the assignment step in K-means since we only consider to different values, namely 1 and $\infty$.
+
+The M-step is equivalent for both algorithms since the new means are computed by optimization.
+ 
 
 \paragraph*{Problem 2}
 $\;$ 
