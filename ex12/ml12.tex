@@ -120,6 +120,7 @@ The posterior distribution is $p(z_i|x_i) = \mathcal{N}(z_i|m_i, \Mtx{\Sigma})$.
 \begin{eqnarray}
 \Mtx{\Sigma} = \sigma^2 (\Mtx{W}^T\Mtx{W}+\sigma^2\Mtx{I})^{-1}\\
 m_i = (\Mtx{W}^T\Mtx{W} + \sigma^2\Mtx{I})^{-1} (\Mtx{W}^T (x_i-\mu))
+\label{mean}
 \end{eqnarray}
 (see Bishop (12.42)).
 
@@ -128,10 +129,20 @@ The maximum likelihood solution is given in Bishop (12.45)
 \begin{eqnarray}
 \Mtx{W}_{ML} = \Mtx{U}_M(\Mtx{L}_M-\sigma^2\Mtx{I})^{1/2}\Mtx{R}
 \end{eqnarray}
-With $\sigma^2 \rightarrow 0$ $\Mtx{W}$ converges to
+With $\sigma^2 \rightarrow 0$ $\Mtx{W}$ and choosing $\Mtx{R}=\Mtx{I}$ it converges to
 \begin{eqnarray}
-\Mtx{W}_{ML} = \Mtx{U}_M \Mtx{L}_M^{1/2}
+\Mtx{W}_{ML} \rightarrow \Mtx{U}_M \Mtx{L}_M^{1/2}
 \end{eqnarray}
-
+Using this in the first part of equation \ref{mean} results in the following
+\begin{eqnarray}
+(\Mtx{W}^T\Mtx{W} + \sigma^2\Mtx{I})^{-1} \rightarrow ((\Mtx{U}_M \Mtx{L}_M^{1/2})^T(\Mtx{U}_M \Mtx{L}_M^{1/2}))^{-1} = ((\Mtx{L}_M^{1/2})^T \Mtx{U}_M^T \Mtx{U}_M \Mtx{L}_M^{1/2})^{-1} = \Mtx{L}_M^{-1}
+\end{eqnarray}
+Inserting this in \ref{mean}:
+\begin{eqnarray}
+m_i &=& \Mtx{L}_M^{-1} (\Mtx{U}_M \Mtx{L}_M^{1/2})^T (x_i - \mu)\\
+&=& \Mtx{L}_M^{-1} (\Mtx{L}_M^{1/2})^T \Mtx{U}_M^T (x_i - \mu)\\
+&=& \Mtx{L}_M^{-1/2} \Mtx{U}_M^T (x_i - \mu)
+\end{eqnarray}
+This is an orthogonal projection onto the same principal subspace as in PCA. (see Bishop (12.24))
 
 \end{document}
