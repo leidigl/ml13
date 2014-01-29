@@ -97,6 +97,14 @@ one has to calculate
 \begin{eqnarray}
 E(xx^T) = E_Z(E_{X|Z}(xx^T|z)) = \sum_k \pi_k E(xx^T|z)
 \end{eqnarray}
+By using 
+\begin{eqnarray}
+E(xx^T|z) = \Sigma_k + \mu_k\mu_k^T
+\end{eqnarray}
+we finally get
+\begin{eqnarray}
+Cov(x) = \sum_k \pi_k (\Sigma_k + \mu_k\mu_k^T) - E(x)E(x)^T
+\end{eqnarray}
 
 
 \section{Assignment: FA/pPCA and PCA}
