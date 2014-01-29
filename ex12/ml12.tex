@@ -116,6 +116,22 @@ $\;$
 \paragraph*{Problem 4}
 $\;$ 
 
+The posterior distribution is $p(z_i|x_i) = \mathcal{N}(z_i|m_i, \Mtx{\Sigma})$. Its variance and mean are
+\begin{eqnarray}
+\Mtx{\Sigma} = \sigma^2 (\Mtx{W}^T\Mtx{W}+\sigma^2\Mtx{I})^{-1}\\
+m_i = (\Mtx{W}^T\Mtx{W} + \sigma^2\Mtx{I})^{-1} (\Mtx{W}^T (x_i-\mu))
+\end{eqnarray}
+(see Bishop (12.42)).
+
+Furthermore, we have to consider $\Mtx{W}$ since it is dependent on $\sigma^2$.
+The maximum likelihood solution is given in Bishop (12.45)
+\begin{eqnarray}
+\Mtx{W}_{ML} = \Mtx{U}_M(\Mtx{L}_M-\sigma^2\Mtx{I})^{1/2}\Mtx{R}
+\end{eqnarray}
+With $\sigma^2 \rightarrow 0$ $\Mtx{W}$ converges to
+\begin{eqnarray}
+\Mtx{W}_{ML} = \Mtx{U}_M \Mtx{L}_M^{1/2}
+\end{eqnarray}
 
 
 \end{document}
